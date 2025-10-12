@@ -503,11 +503,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <strong>MLM Status</strong>
+                        <strong>Network Status</strong>
                         <div class="text-body-secondary small">Commission eligibility</div>
                     </div>
                     <div>
-                        @if($user->isActive())
+                        @if($user->isNetworkActive())
                             <span class="badge bg-success">
                                 <svg class="icon me-1">
                                     <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-check-circle') }}"></use>
@@ -521,13 +521,13 @@
                         @endif
                     </div>
                 </div>
-                @if(!$user->isActive())
+                @if(!$user->isNetworkActive())
                     <div class="alert alert-info mb-3">
                         <div class="d-flex align-items-start">
                             <svg class="icon me-2 flex-shrink-0">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-info') }}"></use>
                             </svg>
-                            <small>Purchase a package to activate your account and start earning MLM commissions from your downline.</small>
+                            <small>Purchase a package to activate your account and start earning MLM and Unilevel commissions from your downline.</small>
                         </div>
                     </div>
                 @endif
@@ -537,7 +537,9 @@
                         <div class="text-body-secondary small">Secure your account</div>
                     </div>
                     <div>
-                        @if($user->hasVerifiedEmail())
+                        @if(is_null($user->email))
+                            <span class="badge bg-secondary">None</span>
+                        @elseif($user->hasVerifiedEmail())
                             <span class="badge bg-success">Verified</span>
                         @else
                             <span class="badge bg-warning">Unverified</span>

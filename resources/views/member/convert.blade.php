@@ -14,7 +14,7 @@
                     </svg>
                     Convert Balance
                 </h4>
-                <p class="text-body-secondary mb-0">Convert MLM balance to Purchase balance for transfers</p>
+                <p class="text-body-secondary mb-0">Convert your withdrawable earnings to Purchase Balance</p>
             </div>
             <div>
                 <a href="{{ route('dashboard') }}" class="btn btn-secondary">
@@ -33,8 +33,8 @@
     <div class="col-md-6">
         <div class="card bg-success-gradient text-white">
             <div class="card-body text-center">
-                <h5 class="card-title">MLM Balance</h5>
-                <h2 class="display-4 fw-bold">{{ currency($wallet->mlm_balance) }}</h2>
+                <h5 class="card-title">Network Balance</h5>
+                <h2 class="display-4 fw-bold">{{ currency($wallet->available_for_withdrawal) }}</h2>
                 <p class="mb-0 small">Available for conversion</p>
             </div>
         </div>
@@ -61,8 +61,8 @@
                 Why Convert Balance?
             </h6>
             <p class="mb-0">
-                <strong>MLM Balance</strong> is earned from commissions and can only be withdrawn to your bank account.
-                Convert it to <strong>Purchase Balance</strong> to transfer funds to other users or use it for purchases.
+                <strong>Network Balance</strong> (your total MLM and Unilevel earnings) is withdrawable.
+                Convert it to <strong>Purchase Balance</strong> to transfer funds to other users within the system.
             </p>
             <hr class="my-2">
             <p class="mb-0 small">
@@ -76,7 +76,7 @@
 </div>
 
 <!-- Quick Amount Buttons -->
-@if($wallet->mlm_balance > 0)
+@if($wallet->available_for_withdrawal > 0)
 <div class="row mb-4">
     <div class="col-md-10 mx-auto">
         <div class="card">
@@ -89,18 +89,18 @@
             <div class="card-body">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     @foreach([10, 25, 50, 100, 250, 500] as $quickAmount)
-                        @if($wallet->mlm_balance >= $quickAmount)
+                        @if($wallet->available_for_withdrawal >= $quickAmount)
                             <button type="button" class="btn btn-outline-primary" onclick="setAmount({{ $quickAmount }})">
                                 {{ currency_symbol() }}{{ $quickAmount }}
                             </button>
                         @endif
                     @endforeach
-                    @if($wallet->mlm_balance > 0)
-                        <button type="button" class="btn btn-outline-success" onclick="setAmount({{ $wallet->mlm_balance }})">
+                    @if($wallet->available_for_withdrawal > 0)
+                        <button type="button" class="btn btn-outline-success" onclick="setAmount({{ $wallet->available_for_withdrawal }})">
                             <svg class="icon me-1">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-layers') }}"></use>
                             </svg>
-                            All ({{ currency($wallet->mlm_balance) }})
+                            All ({{ currency($wallet->available_for_withdrawal) }})
                         </button>
                     @endif
                 </div>
@@ -160,12 +160,12 @@
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text">{{ currency_symbol() }}</span>
                                     <input type="number" name="amount" id="amount" class="form-control"
-                                           placeholder="0.00" min="1" max="{{ min($wallet->mlm_balance, 10000) }}" step="0.01" required
+                                           placeholder="0.00" min="1" max="{{ min($wallet->available_for_withdrawal, 10000) }}" step="0.01" required
                                            value="{{ old('amount') }}">
                                     <span class="input-group-text">{{ currency_code() }}</span>
                                 </div>
                                 <div class="form-text">
-                                    Minimum: {{ currency(1) }} | Maximum: {{ currency(min($wallet->mlm_balance, 10000)) }}
+                                    Minimum: {{ currency(1) }} | Maximum: {{ currency(min($wallet->available_for_withdrawal, 10000)) }}
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                             </h6>
                             <div class="row text-center">
                                 <div class="col-6">
-                                    <div class="text-body-secondary small">From MLM Balance</div>
+                                    <div class="text-body-secondary small">From Network Balance</div>
                                     <div class="fw-bold text-danger" id="from-amount-display">{{ currency_symbol() }}0.00</div>
                                     <small class="text-muted">Will be deducted</small>
                                 </div>
@@ -220,8 +220,8 @@
                         </h6>
                         <ul class="mb-0">
                             <li>Conversions are processed instantly with no fees</li>
-                            <li>MLM Balance will be decreased by the converted amount</li>
-                            <li>Purchase Balance will be increased by the same amount</li>
+                            <li>Your Withdrawable Balance will be decreased by the converted amount</li>
+                            <li>Your Purchase Balance will be increased by the same amount</li>
                             <li>After conversion, you can transfer the funds to other users</li>
                             <li>Completed conversions cannot be reversed</li>
                         </ul>
@@ -229,7 +229,7 @@
 
                     <div class="d-grid gap-2 d-md-flex">
                         <button type="submit" class="btn btn-success btn-lg flex-md-fill"
-                                {{ !$wallet->is_active || $wallet->mlm_balance <= 0 ? 'disabled' : '' }}>
+                                {{ !$wallet->is_active || $wallet->available_for_withdrawal <= 0 ? 'disabled' : '' }}>
                             <svg class="icon me-2">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-check-circle') }}"></use>
                             </svg>

@@ -16,7 +16,7 @@ return new class extends Migration
         // This is a one-time migration to fix wallets that were created before
         // the MLM balance system was implemented
 
-        DB::statement('
+        $affectedRows = DB::update('
             UPDATE wallets
             SET purchase_balance = purchase_balance + balance,
                 balance = 0
@@ -24,7 +24,7 @@ return new class extends Migration
         ');
 
         \Log::info('Migrated old wallet balances to purchase_balance', [
-            'affected_rows' => DB::affectedRows()
+            'affected_rows' => $affectedRows
         ]);
     }
 

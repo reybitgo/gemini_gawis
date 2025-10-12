@@ -1,24 +1,30 @@
 @if(auth()->check() && auth()->user()->wallet)
-<div class="card shadow-sm border-success" id="mlm-balance-widget">
+<div class="card shadow-sm border-success" id="network-earnings-widget">
     <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
         <h6 class="mb-0">
-            <i class="cil-wallet"></i> MLM Earnings
+            <i class="cil-wallet"></i> Network Earnings
         </h6>
         <span class="badge bg-light text-success">Withdrawable</span>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-6 mb-3">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3 border-end">
                 <label class="text-muted small">MLM Balance</label>
-                <h3 class="mb-0 text-success" id="mlm-balance-display">
-                    {{ currency(auth()->user()->wallet->mlm_balance ?? 0) }}
-                </h3>
+                <h4 class="mb-0 text-success" id="mlm-balance-display">
+                    {{ currency($wallet->lifetime_mlm_earnings ?? 0) }}
+                </h4>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3 border-end">
+                <label class="text-muted small">Unilevel Balance</label>
+                <h4 class="mb-0 text-success" id="unilevel-balance-display">
+                    {{ currency($wallet->lifetime_unilevel_earnings ?? 0) }}
+                </h4>
+            </div>
+            <div class="col-md-4 mb-3">
                 <label class="text-muted small">Purchase Balance</label>
-                <h3 class="mb-0" id="purchase-balance-display">
-                    {{ currency(auth()->user()->wallet->purchase_balance ?? 0) }}
-                </h3>
+                <h4 class="mb-0" id="purchase-balance-display">
+                    {{ currency($wallet->purchase_balance ?? 0) }}
+                </h4>
             </div>
         </div>
         <hr>

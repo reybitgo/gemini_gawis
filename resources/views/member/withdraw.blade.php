@@ -33,8 +33,8 @@
     <div class="col-md-4">
         <div class="card bg-success-gradient text-white">
             <div class="card-body text-center">
-                <h5 class="card-title">MLM Balance (Withdrawable)</h5>
-                <h2 class="display-5 fw-bold">{{ currency($wallet->mlm_balance) }}</h2>
+                <h5 class="card-title">Network Balance (Withdrawable)</h5>
+                <h2 class="display-5 fw-bold">{{ currency($wallet->withdrawable_balance) }}</h2>
                 <p class="mb-0 small">
                     <span class="badge bg-light text-success">
                         <i class="icon-check me-1"></i>Can be withdrawn
@@ -150,17 +150,17 @@
                                     <svg class="icon me-2">
                                         <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-arrow-thick-top') }}"></use>
                                     </svg>
-                                    Withdrawal Amount (from MLM Balance)
+                                    Withdrawal Amount
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text">{{ currency_symbol() }}</span>
                                     <input type="number" name="amount" id="amount" class="form-control"
-                                           placeholder="0.00" min="1" max="{{ min($wallet->mlm_balance, 10000) }}" step="0.01" required
+                                           placeholder="0.00" min="1" max="{{ min($availableBalance, 10000) }}" step="0.01" required
                                            value="{{ old('amount') }}">
                                     <span class="input-group-text">{{ currency_code() }}</span>
                                 </div>
                                 <div class="form-text">
-                                    Minimum: {{ currency(1) }} | Maximum: {{ currency(min($wallet->mlm_balance, 10000)) }}
+                                    Minimum: {{ currency(1) }} | Maximum: {{ currency(min($availableBalance, 10000)) }}
                                 </div>
                             </div>
                         </div>
@@ -353,7 +353,7 @@
                     </div>
 
 
-                    <!-- MLM Balance Restriction Notice -->
+                    <!-- Withdrawal Balance Restriction Notice -->
                     <div class="alert alert-info mt-4">
                         <h6 class="alert-heading">
                             <svg class="icon me-2">
@@ -362,8 +362,8 @@
                             Withdrawal Balance Restriction
                         </h6>
                         <p class="mb-0">
-                            <strong>Only MLM commission earnings can be withdrawn.</strong>
-                            Purchase balance (from deposits and transfers) cannot be withdrawn and can only be used for package purchases within the system.
+                            <strong>Only your Network Balance (from commissions and bonuses) can be withdrawn.</strong>
+                            Purchase balance (from deposits and transfers) cannot be withdrawn and can only be used for purchases within the system.
                         </p>
                     </div>
 
@@ -379,7 +379,7 @@
                             <li>All withdrawals require admin approval and are processed manually</li>
                             @if($withdrawalFeeSettings['fee_enabled'])
                                 <li><strong>Processing fees are deducted immediately upon submission and are non-refundable</strong></li>
-                                <li>If your withdrawal is rejected, only the withdrawal amount will be returned to your MLM balance</li>
+                                <li>If your withdrawal is rejected, only the withdrawal amount will be returned to your Withdrawable Balance</li>
                             @endif
                             <li>Please verify your payment method details are correct to avoid delays</li>
                             <li>Processing typically takes 1-3 business days depending on your chosen method</li>
@@ -404,7 +404,7 @@
 
                     <div class="d-grid gap-2 d-md-flex">
                         <button type="submit" id="submit-withdrawal-btn" class="btn btn-danger btn-lg flex-md-fill" disabled
-                                {{ !$wallet->is_active || $wallet->mlm_balance <= 0 ? 'data-wallet-disabled="true"' : '' }}>
+                                {{ !$wallet->is_active || $availableBalance <= 0 ? 'data-wallet-disabled="true"' : '' }}>
                             <svg class="icon me-2">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-minus') }}"></use>
                             </svg>

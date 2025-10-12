@@ -39,7 +39,6 @@ return new class extends Migration
             $table->index(['type', 'created_at']);
             $table->index(['user_id', 'type']);
             $table->index(['level', 'created_at']);
-            $table->index('event');
         });
     }
 

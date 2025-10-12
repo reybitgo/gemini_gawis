@@ -92,13 +92,13 @@
                             <svg class="icon text-success me-2">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-gift') }}"></use>
                             </svg>
-                            Sample packages will be&nbsp;<strong>restored</strong>&nbsp;(preloaded e-commerce products)
+                            Sample Packages (MLM) and Products (Unilevel) will be&nbsp;<strong>restored</strong>
                         </li>
                         <li class="list-group-item d-flex align-items-center">
                             <svg class="icon text-success me-2">
                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-task') }}"></use>
                             </svg>
-                            MLM settings will be&nbsp;<strong>restored</strong>&nbsp;with commission structure (5 levels)
+                            MLM and Unilevel bonus settings will be&nbsp;<strong>restored</strong>
                         </li>
                     </ul>
 
@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="alert alert-info mb-4">
-                    <h6 class="alert-heading mb-2">
+                        <h6>
                         <svg class="icon me-2">
                             <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-info') }}"></use>
                         </svg>
@@ -222,8 +222,8 @@
                         <li><strong>Current system settings preserved</strong> (fees, email verification)</li>
                         <li><strong>Current application settings preserved</strong> (tax rate, email verification after registration)</li>
                         <li><strong>All roles and permissions preserved</strong></li>
-                        <li><strong>Sample packages restored to initial state</strong> (preloaded e-commerce products)</li>
-                        <li><strong>MLM settings restored</strong> with commission structure (5 levels)</li>
+                        <li><strong>Sample Packages (MLM) and Products (Unilevel) restored</strong> to initial state</li>
+                        <li><strong>MLM (for Packages) and Unilevel (for Products) settings restored</strong></li>
                         <li>Fresh wallets with initial balances ($1,000 & $100) and segregated MLM/Purchase balances</li>
                         <li>Clean e-commerce system ready for new orders (26-status order lifecycle)</li>
                         <li>Return & refund system ready for testing (7-day return window)</li>
@@ -250,6 +250,9 @@
         </div>
     </div>
 </div>
+
+<!-- Bottom spacing -->
+<div class="pb-5"></div>
 
 @push('scripts')
 <script>

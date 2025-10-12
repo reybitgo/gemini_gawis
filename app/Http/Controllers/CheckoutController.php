@@ -277,13 +277,18 @@ class CheckoutController extends Controller
 
             // Reduce package and product quantities
             foreach ($cartSummary['items'] as $cartItem) {
-                if ($cartItem['type'] === 'package') {
-                    $package = \App\Models\Package::find($cartItem['item_id']);
+                // Determine item type for backward compatibility
+                $itemType = $cartItem['type'] ?? (isset($cartItem['package_id']) ? 'package' : 'product');
+
+                if ($itemType === 'package') {
+                    $itemId = $cartItem['item_id'] ?? $cartItem['package_id'];
+                    $package = \App\Models\Package::find($itemId);
                     if ($package && $package->quantity_available !== null) {
                         $package->reduceQuantity($cartItem['quantity']);
                     }
-                } else if ($cartItem['type'] === 'product') {
-                    $product = Product::find($cartItem['item_id']);
+                } else if ($itemType === 'product') {
+                    $itemId = $cartItem['item_id'];
+                    $product = Product::find($itemId);
                     if ($product && $product->quantity_available !== null) {
                         $product->reduceQuantity($cartItem['quantity']);
                     }

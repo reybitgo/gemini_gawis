@@ -244,7 +244,7 @@
                                                {{ old('is_mlm_package', $package->is_mlm_package) ? 'checked' : '' }}
                                                {{ !$package->canBeDeleted() && $package->is_mlm_package ? 'disabled' : '' }}>
                                         <label class="form-check-label" for="is_mlm_package">
-                                            MLM Package (Commission-based)
+                                            Network Package (Commission-based)
                                         </label>
                                     </div>
                                     @if(!$package->canBeDeleted() && $package->is_mlm_package)
@@ -252,7 +252,7 @@
                                             <svg class="icon me-1">
                                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
                                             </svg>
-                                            Cannot change MLM status - this package has been purchased
+                                            Cannot change Network status - this package has been purchased
                                         </div>
                                     @else
                                         <div class="form-text">Enable multi-level marketing commission structure for this package</div>

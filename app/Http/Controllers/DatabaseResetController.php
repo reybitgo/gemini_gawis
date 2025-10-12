@@ -264,8 +264,8 @@ class DatabaseResetController extends Controller
         try {
             Log::info('Ensuring performance optimizations are in place');
 
-            // Run all pending migrations to ensure performance indexes exist
-            Artisan::call('migrate', ['--force' => true]);
+            // Use migrate:fresh to drop all tables and re-run all migrations for a clean slate
+            Artisan::call('migrate:fresh', ['--force' => true]);
 
             Log::info('Performance optimizations completed', [
                 'migrations_output' => Artisan::output()

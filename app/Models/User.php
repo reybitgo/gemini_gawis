@@ -116,9 +116,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function hasVerifiedEmail()
     {
-        // Users without email don't need verification
+        // Users without email are not considered verified.
         if (is_null($this->email)) {
-            return true;
+            return false;
         }
 
         // Users with email need to verify it
@@ -131,10 +131,13 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return bool
      */
-    public function isActive()
+    public function isNetworkActive()
     {
         return $this->orders()
-            ->whereIn('payment_status', ['paid'])
+            ->where('payment_status', 'paid')
+            ->whereHas('orderItems', function ($query) {
+                $query->where('item_type', 'package');
+            })
             ->exists();
     }
 

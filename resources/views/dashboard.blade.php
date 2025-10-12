@@ -97,7 +97,7 @@
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h6 class="mb-0">
-                    <i class="cil-people"></i> MLM Network Stats
+                    <i class="cil-people"></i> Network Stats
                 </h6>
             </div>
             <div class="card-body">
@@ -107,8 +107,8 @@
                         <h4 class="mb-0">{{ auth()->user()->referrals()->count() }}</h4>
                     </div>
                     <div class="col-6 mb-3">
-                        <label class="text-muted small">Total Earnings</label>
-                        <h4 class="mb-0 text-success">{{ currency(auth()->user()->wallet->mlm_balance ?? 0) }}</h4>
+                        <label class="text-muted small">Total Network Earnings</label>
+                        <h4 class="mb-0 text-success">{{ currency(auth()->user()->wallet->lifetime_earnings ?? 0) }}</h4>
                     </div>
                 </div>
                 <hr>

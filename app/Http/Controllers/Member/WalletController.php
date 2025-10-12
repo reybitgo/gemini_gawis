@@ -314,7 +314,7 @@ class WalletController extends Controller
             $message .= ' The funds have been transferred instantly.';
             session()->flash('success', $message);
 
-            return redirect()->route('wallet.transactions');
+            return redirect()->route('wallet.transfer');
 
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['general' => 'Transfer failed. Please try again later.']);
@@ -334,8 +334,8 @@ class WalletController extends Controller
             ->where('status', 'pending')
             ->sum('amount');
 
-        // IMPORTANT: Only MLM balance can be withdrawn (purchase balance from deposits/transfers cannot be withdrawn)
-        $availableBalance = $wallet->mlm_balance - $pendingWithdrawals;
+        // Withdrawable balance is the combined MLM and Unilevel earnings
+        $availableBalance = $wallet->withdrawable_balance - $pendingWithdrawals;
 
         // Get payment method settings
         $paymentSettings = [
@@ -420,17 +420,17 @@ class WalletController extends Controller
         $withdrawalFee = $this->calculateWithdrawalFee($withdrawalAmount);
         $totalAmount = $withdrawalAmount + $withdrawalFee;
 
-        // Calculate total pending withdrawal requests for this user (only withdrawal amounts, fees are already deducted)
+        // Calculate total pending withdrawal requests for this user
         $pendingWithdrawals = Transaction::where('user_id', $user->id)
             ->where('type', 'withdrawal')
             ->where('status', 'pending')
             ->sum('amount');
 
-        // IMPORTANT: Check available MLM balance only (purchase balance cannot be withdrawn)
-        $availableBalance = $wallet->mlm_balance - $pendingWithdrawals;
+        // Check available Withdrawable balance (MLM + Unilevel)
+        $availableBalance = $wallet->withdrawable_balance - $pendingWithdrawals;
 
         if ($availableBalance < $totalAmount) {
-            $errorMessage = 'Insufficient MLM balance. Only MLM commission earnings can be withdrawn. ';
+            $errorMessage = 'Insufficient withdrawable balance. ';
             if ($withdrawalFee > 0) {
                 $errorMessage .= 'Total required: ' . currency($totalAmount) . ' (Withdrawal: ' . currency($withdrawalAmount) . ' + Fee: ' . currency($withdrawalFee) . '). ';
             } else {
@@ -439,7 +439,7 @@ class WalletController extends Controller
             if ($pendingWithdrawals > 0) {
                 $errorMessage .= 'You have ' . currency($pendingWithdrawals) . ' in pending withdrawals. ';
             }
-            $errorMessage .= 'Available MLM balance: ' . currency($availableBalance) . '. MLM Balance: ' . currency($wallet->mlm_balance) . ' | Purchase Balance: ' . currency($wallet->purchase_balance) . ' (cannot be withdrawn).';
+            $errorMessage .= 'Your available withdrawable balance is ' . currency($availableBalance) . '.';
 
             return redirect()->back()->withErrors(['amount' => $errorMessage]);
         }
@@ -669,9 +669,9 @@ class WalletController extends Controller
         $wallet = $user->getOrCreateWallet();
         $convertAmount = $request->amount;
 
-        // Check if user has sufficient MLM balance
-        if ($wallet->mlm_balance < $convertAmount) {
-            return redirect()->back()->withErrors(['amount' => 'Insufficient MLM balance. You need ' . currency($convertAmount) . ' but you only have ' . currency($wallet->mlm_balance) . ' in your MLM balance.']);
+        // Check if user has sufficient Withdrawable balance (MLM + Unilevel)
+        if ($wallet->withdrawable_balance < $convertAmount) {
+            return redirect()->back()->withErrors(['amount' => 'Insufficient Withdrawable Balance. You need ' . currency($convertAmount) . ' but you only have ' . currency($wallet->withdrawable_balance) . ' in your withdrawable balance.']);
         }
 
         // Check if wallet is active
@@ -685,8 +685,8 @@ class WalletController extends Controller
                 $wallet = Wallet::where('user_id', $user->id)->lockForUpdate()->first();
 
                 // Re-check balance after locking
-                if ($wallet->mlm_balance < $convertAmount) {
-                    throw new \Exception('Insufficient MLM balance after lock');
+                if ($wallet->withdrawable_balance < $convertAmount) {
+                    throw new \Exception('Insufficient withdrawable balance after lock');
                 }
 
                 // Create balance conversion transaction
@@ -696,21 +696,21 @@ class WalletController extends Controller
                     'amount' => $convertAmount,
                     'status' => 'approved', // Conversions are instant
                     'payment_method' => 'internal',
-                    'description' => 'Converted MLM balance to Purchase balance',
+                    'description' => 'Converted Withdrawable Balance to Purchase Balance',
                     'metadata' => [
-                        'from_balance' => 'mlm_balance',
+                        'from_balance' => 'withdrawable_balance',
                         'to_balance' => 'purchase_balance',
-                        'mlm_balance_before' => $wallet->mlm_balance,
+                        'withdrawable_balance_before' => $wallet->withdrawable_balance,
                         'purchase_balance_before' => $wallet->purchase_balance,
-                        'mlm_balance_after' => $wallet->mlm_balance - $convertAmount,
+                        'withdrawable_balance_after' => $wallet->withdrawable_balance - $convertAmount,
                         'purchase_balance_after' => $wallet->purchase_balance + $convertAmount,
                         'ip_address' => $request->ip(),
                         'user_agent' => $request->userAgent(),
                     ]
                 ]);
 
-                // Deduct from MLM balance
-                $wallet->decrement('mlm_balance', $convertAmount);
+                // Deduct from Withdrawable balance
+                $wallet->decrement('withdrawable_balance', $convertAmount);
 
                 // Add to Purchase balance
                 $wallet->increment('purchase_balance', $convertAmount);
@@ -721,7 +721,7 @@ class WalletController extends Controller
                 // Log conversion operation
                 ActivityLog::logWalletTransaction(
                     event: 'balance_converted',
-                    message: sprintf('%s converted ₱%s from MLM balance to Purchase balance',
+                    message: sprintf('%s converted ₱%s from Withdrawable Balance to Purchase Balance',
                         $user->username ?? $user->fullname ?? 'User',
                         number_format($convertAmount, 2)
                     ),
@@ -730,9 +730,9 @@ class WalletController extends Controller
                 );
             });
 
-            session()->flash('success', 'Successfully converted ' . currency($convertAmount) . ' from MLM balance to Purchase balance. You can now transfer this amount to other users.');
+            session()->flash('success', 'Successfully converted ' . currency($convertAmount) . ' from Withdrawable Balance to Purchase Balance.');
 
-            return redirect()->route('wallet.transactions');
+            return redirect()->route('wallet.convert');
 
         } catch (\Exception $e) {
             \Log::error('Balance conversion failed', [

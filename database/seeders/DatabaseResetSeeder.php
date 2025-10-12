@@ -57,6 +57,9 @@ class DatabaseResetSeeder extends Seeder
         // Step 6: Reset and reload preloaded packages
         $this->resetAndReloadPackages();
 
+        // Step 6.5: Reset and reload preloaded products
+        $this->resetAndReloadProducts();
+
         // Step 7: Update reset tracking
         $this->updateResetTracking();
 
@@ -282,24 +285,15 @@ class DatabaseResetSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission => $description) {
-            Permission::firstOrCreate(
-                ['name' => $permission],
-                ['description' => $description]
-            );
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
         // Create admin role with all permissions
-        $adminRole = Role::firstOrCreate(
-            ['name' => 'admin'],
-            ['description' => 'Full system administrator access']
-        );
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $adminRole->syncPermissions(Permission::all());
 
         // Create member role with limited permissions
-        $memberRole = Role::firstOrCreate(
-            ['name' => 'member'],
-            ['description' => 'Regular user with wallet access']
-        );
+        $memberRole = Role::firstOrCreate(['name' => 'member']);
         $memberRole->syncPermissions([
             'deposit_funds',
             'transfer_funds',
@@ -457,30 +451,14 @@ class DatabaseResetSeeder extends Seeder
      */
     private function ensureApplicationSettings(): void
     {
-        $this->command->info('⚙️  Verifying application settings preservation...');
+        $this->command->info('⚙️  Verifying and setting application settings...');
 
-        // Check if application settings exist in system_settings table
-        $taxRateSetting = SystemSetting::where('key', 'tax_rate')->first();
+        // Force tax rate to 0 on every reset
+        SystemSetting::set('tax_rate', 0.00, 'decimal', 'E-commerce tax rate (0.0 to 1.0)');
+        $this->command->info('✅ Set tax rate to 0%');
+
+        // Check if email verification setting exists, create if not
         $emailVerifRegSetting = SystemSetting::where('key', 'email_verification_required')->first();
-
-        if ($taxRateSetting && $emailVerifRegSetting) {
-            $this->command->info("✅ Application settings preserved (tax rate, email verification)");
-            return;
-        }
-
-        // Create default application settings if they don't exist
-        $this->command->info('⚙️  Creating default application settings...');
-
-        if (!$taxRateSetting) {
-            SystemSetting::create([
-                'key' => 'tax_rate',
-                'value' => 0.12,
-                'type' => 'decimal',
-                'description' => 'E-commerce tax rate (0.0 to 1.0)'
-            ]);
-            $this->command->info('✅ Created default tax rate: 12%');
-        }
-
         if (!$emailVerifRegSetting) {
             SystemSetting::create([
                 'key' => 'email_verification_required',
@@ -489,6 +467,8 @@ class DatabaseResetSeeder extends Seeder
                 'description' => 'Require email verification after registration'
             ]);
             $this->command->info('✅ Created default email verification setting: enabled');
+        } else {
+            $this->command->info('✅ Email verification setting preserved.');
         }
     }
 
@@ -709,5 +689,33 @@ class DatabaseResetSeeder extends Seeder
         }
 
         $this->command->newLine();
+    }
+
+    /**
+     * Reset and reload preloaded products
+     */
+    private function resetAndReloadProducts(): void
+    {
+        $this->command->info('📦 Resetting and reloading preloaded products...');
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        \App\Models\UnilevelSetting::truncate();
+        \App\Models\Product::truncate();
+        
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $this->command->info('🗑️  Cleared all existing products and unilevel settings');
+
+        // Reset auto-increment counters
+        DB::statement('ALTER TABLE products AUTO_INCREMENT = 1');
+        DB::statement('ALTER TABLE unilevel_settings AUTO_INCREMENT = 1');
+
+        // Reload preloaded products by calling the ProductSeeder
+        $this->command->info('🔄 Reloading preloaded products with Unilevel settings...');
+        $this->call(\Database\Seeders\ProductSeeder::class);
+
+        $productCount = \App\Models\Product::count();
+        $this->command->info("✅ Reloaded {$productCount} preloaded products.");
     }
 }
