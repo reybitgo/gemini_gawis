@@ -256,40 +256,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     </svg>In Cart`;
 
                     // Update cart count in header if it exists
-                    const cartBadge = document.querySelector('.cart-count-badge');
+                    const cartBadge = document.getElementById('cart-count');
                     if (cartBadge) {
                         cartBadge.textContent = data.cart_count;
+                        cartBadge.style.display = data.cart_count > 0 ? 'inline' : 'none';
                     }
 
-                    // Show success toast
-                    showToast('success', data.message);
+                    // Refresh the cart dropdown in the header
+                    if (window.cartManager) {
+                        window.cartManager.refreshCartDropdown();
+                        window.cartManager.showMessage(data.message, 'success');
+                    }
                 } else {
                     // Restore button state
                     btn.disabled = false;
                     btn.innerHTML = originalHTML;
-                    showToast('error', data.message);
+                    if (window.cartManager) {
+                        window.cartManager.showMessage(data.message, 'error');
+                    }
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
                 btn.disabled = false;
                 btn.innerHTML = originalHTML;
-                showToast('error', 'Failed to add product to cart. Please try again.');
+                if (window.cartManager) {
+                    window.cartManager.showMessage('Failed to add product to cart. Please try again.', 'error');
+                }
             }
         });
     });
-
-    // Simple toast notification function
-    function showToast(type, message) {
-        const toast = document.createElement('div');
-        toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 end-0 m-3`;
-        toast.style.zIndex = '9999';
-        toast.innerHTML = message;
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-            toast.remove();
-        }, 3000);
-    }
 });
 </script>
 @endsection

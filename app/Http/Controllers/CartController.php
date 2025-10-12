@@ -21,8 +21,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartSummary = $this->cartService->getSummary();
         $validationIssues = $this->cartService->validateCart();
+        $cartSummary = $this->cartService->getSummary();
 
         return view('cart.index', compact('cartSummary', 'validationIssues'));
     }

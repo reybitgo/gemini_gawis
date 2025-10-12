@@ -155,21 +155,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     btn.classList.add('btn-success');
                     btn.innerHTML = `<svg class="icon me-2"><use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-check') }}"></use></svg>In Cart`;
 
-                    const cartBadge = document.querySelector('.cart-count-badge');
+                    const cartBadge = document.getElementById('cart-count');
                     if (cartBadge) {
                         cartBadge.textContent = data.cart_count;
+                        cartBadge.style.display = data.cart_count > 0 ? 'inline' : 'none';
                     }
-                    // You can add a success message/toast here
+
+                    if (window.cartManager) {
+                        window.cartManager.refreshCartDropdown();
+                        window.cartManager.showMessage(data.message, 'success');
+                    }
                 } else {
                     btn.disabled = false;
                     btn.innerHTML = originalHTML;
-                    // You can add an error message/toast here
+                    if (window.cartManager) {
+                        window.cartManager.showMessage(data.message, 'error');
+                    }
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
                 btn.disabled = false;
                 btn.innerHTML = originalHTML;
-                // You can add an error message/toast here
+                if (window.cartManager) {
+                    window.cartManager.showMessage('Failed to add product to cart. Please try again.', 'error');
+                }
             }
         });
     }

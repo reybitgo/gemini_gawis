@@ -79,6 +79,8 @@ class CartService
             Session::put(self::CART_SESSION_KEY, $items);
         }
 
+        unset($item); // Destroy the lingering reference
+
         return $items;
     }
 
@@ -434,11 +436,10 @@ class CartService
                 $item['points_awarded'] = $package->points_awarded;
                 $item['image_url'] = $package->image_url;
             } else {
-                // Product validation
-                $product = Product::find($actualItemId);
-
-                if (!$product || !$product->isAvailable()) {
-                    $issues[] = "'{$item['name']}' is no longer available and has been removed from your cart.";
+                                        // Product validation
+                                        $product = Product::find($actualItemId);
+                            
+                                        if (!$product || !$product->isAvailable()) {                    $issues[] = "'{$item['name']}' is no longer available and has been removed from your cart.";
                     continue;
                 }
 
