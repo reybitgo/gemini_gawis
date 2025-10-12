@@ -51,6 +51,11 @@ class MLMCommissionService
 
                 // Traverse upline up to max levels
                 while ($currentUser && $level <= $maxLevels) {
+                    if (!$currentUser->isNetworkActive()) {
+                        $currentUser = $currentUser->sponsor;
+                        continue; // Skip to the next sponsor
+                    }
+                    
                     $commission = MlmSetting::getCommissionForLevel($package->id, $level);
 
                     if ($commission > 0) {
@@ -133,7 +138,7 @@ class MLMCommissionService
     {
         try {
             // Check if user is active (has purchased a package)
-            if (!$user->isActive()) {
+            if (!$user->isNetworkActive()) {
                 Log::info('User is not active (no package purchase), skipping commission', [
                     'user_id' => $user->id,
                     'user_name' => $user->username ?? $user->fullname ?? 'Unknown',
