@@ -34,6 +34,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'delivery_time_preference',
         'sponsor_id',
         'referral_code',
+        'network_status',
+        'network_activated_at',
+        'last_product_purchase_at',
         'suspended_at',
         'payment_preference',
         'gcash_number',
@@ -65,6 +68,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'suspended_at' => 'datetime',
+            'network_activated_at' => 'datetime',
+            'last_product_purchase_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -126,19 +131,26 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Check if user is active (has purchased at least one package)
-     * Active users are eligible for MLM commissions
+     * Check if user is active for network commissions.
      *
      * @return bool
      */
-    public function isNetworkActive()
+    public function isNetworkActive(): bool
     {
-        return $this->orders()
-            ->where('payment_status', 'paid')
-            ->whereHas('orderItems', function ($query) {
-                $query->where('item_type', 'package');
-            })
-            ->exists();
+        return $this->network_status === 'active';
+    }
+
+    /**
+     * Activate the user's network status.
+     */
+    public function activateNetwork(): void
+    {
+        if ($this->network_status !== 'active') {
+            $this->update([
+                'network_status' => 'active',
+                'network_activated_at' => now(),
+            ]);
+        }
     }
 
     /**

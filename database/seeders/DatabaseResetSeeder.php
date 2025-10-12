@@ -66,6 +66,9 @@ class DatabaseResetSeeder extends Seeder
         // Step 8: Verify MLM commission migration status
         $this->verifyMLMCommissionMigration();
 
+        // Step 9: Update network status for existing users
+        $this->updateNetworkStatusForExistingUsers();
+
         $this->command->info('✅ Database reset completed successfully!');
         $this->command->info('👤 Admin: admin@gawisherbal.com / Admin123!@#');
         $this->command->info('👤 Member: member@gawisherbal.com / Member123!@#');
@@ -717,5 +720,34 @@ class DatabaseResetSeeder extends Seeder
 
         $productCount = \App\Models\Product::count();
         $this->command->info("✅ Reloaded {$productCount} preloaded products.");
+    }
+
+    /**
+     * Update network status for existing users based on their order history.
+     */
+    private function updateNetworkStatusForExistingUsers(): void
+    {
+        $this->command->info('🔄 Updating network status for existing users...');
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $firstPackageOrder = $user->orders()
+                ->where('payment_status', 'paid')
+                ->whereHas('orderItems', function ($query) {
+                    $query->where('item_type', 'package');
+                })
+                ->orderBy('created_at', 'asc')
+                ->first();
+
+            if ($firstPackageOrder) {
+                $user->update([
+                    'network_status' => 'active',
+                    'network_activated_at' => $firstPackageOrder->created_at,
+                ]);
+            }
+        }
+
+        $this->command->info('✅ Network status updated for existing users.');
     }
 }

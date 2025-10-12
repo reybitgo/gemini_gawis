@@ -337,6 +337,9 @@ class CheckoutController extends Controller
             });
 
             if ($hasMlmPackage) {
+                // Activate the user's network status
+                $order->user->activateNetwork();
+
                 ProcessMLMCommissions::dispatchSync($order);
 
                 $mlmPackageNames = $order->orderItems
