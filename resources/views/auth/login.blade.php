@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="min-vh-100 d-flex flex-row align-items-center">
+<div class="min-vh-100 d-flex flex-row align-items-center pt-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
