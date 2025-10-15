@@ -277,6 +277,24 @@
 	}
 	/* Contact form validation end */
 
+	/* Back to Top Button */
+	var $btnBackToTop = $("#btn-back-to-top");
+	if($btnBackToTop.length){
+		$window.on('scroll', function() {
+			if ($(this).scrollTop() > 20) {
+				$btnBackToTop.fadeIn();
+			} else {
+				$btnBackToTop.fadeOut();
+			}
+		});
+
+		$btnBackToTop.on('click', function(e) {
+			e.preventDefault();
+			$('html, body').animate({scrollTop : 0}, 100);
+			return false;
+		});
+	}
+
 	/* Animated Wow Js */	
 	new WOW().init();
 

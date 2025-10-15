@@ -125,7 +125,6 @@ a:focus{
 html,
 body{
 	width: 100%;
-	overflow-x: clip;
 }
 
 .container{
@@ -5167,4 +5166,21 @@ header.main-header .header-sticky.active{
     .google-map-iframe iframe{
         height: 350px;
     }
+}
+
+/* Back to Top Button */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    left: auto; /* Explicitly set left to auto */
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color); /* Set icon color */
+}
+
+#btn-back-to-top:hover {
+    background-color: transparent;
+    color: var(--primary-color); /* Set icon color on hover */
 }
