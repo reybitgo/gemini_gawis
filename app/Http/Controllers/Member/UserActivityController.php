@@ -23,13 +23,8 @@ class UserActivityController extends Controller
         $search = $request->get('search', '');
         $level = $request->get('level', 'all');
 
-        // Query activity logs for current user
-        // Include logs where user is the actor OR where user is affected (related_user_id)
         $query = ActivityLog::with(['user', 'transaction', 'order', 'relatedUser'])
-            ->where(function($q) use ($user) {
-                $q->where('user_id', $user->id)
-                  ->orWhere('related_user_id', $user->id);
-            })
+            ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc');
 
         // Apply filters
@@ -68,7 +63,7 @@ class UserActivityController extends Controller
             ];
         });
 
-        return view('member.activity-logs', compact('logs', 'logType', 'search', 'level', 'perPage'));
+        return view('member.activity-logs', compact('activityLogs', 'logType', 'search', 'level', 'perPage'));
     }
 
     /**
@@ -87,10 +82,7 @@ class UserActivityController extends Controller
 
         // Query activity logs for current user with same filters
         $query = ActivityLog::with(['user', 'transaction', 'order', 'relatedUser'])
-            ->where(function($q) use ($user) {
-                $q->where('user_id', $user->id)
-                  ->orWhere('related_user_id', $user->id);
-            })
+            ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc');
 
         // Apply filters

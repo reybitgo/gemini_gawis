@@ -128,6 +128,45 @@ class ActivityLog extends Model
     }
 
     /**
+     * Log Unilevel bonus event
+     */
+    public static function logUnilevelBonus(
+        User $recipient,
+        float $amount,
+        int $level,
+        User $buyer,
+        Order $order,
+        ?int $productId = null,
+        ?string $productName = null
+    ): self {
+        return self::createLog(
+            type: 'unilevel_bonus',
+            event: 'bonus_earned',
+            message: sprintf(
+                '%s earned ₱%s Level %d Unilevel bonus from %s\'s order #%s',
+                $recipient->username ?? $recipient->fullname ?? 'User',
+                number_format($amount, 2),
+                $level,
+                $buyer->username ?? $buyer->fullname ?? 'User',
+                $order->order_number
+            ),
+            level: 'INFO',
+            userId: $recipient->id,
+            metadata: [
+                'bonus_amount' => $amount,
+                'bonus_level' => $level,
+                'buyer_id' => $buyer->id,
+                'buyer_name' => $buyer->username ?? $buyer->fullname ?? 'Unknown',
+                'order_number' => $order->order_number,
+                'product_id' => $productId,
+                'product_name' => $productName,
+            ],
+            orderId: $order->id,
+            relatedUserId: $buyer->id
+        );
+    }
+
+    /**
      * Log wallet transaction event
      */
     public static function logWalletTransaction(

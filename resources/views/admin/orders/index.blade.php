@@ -70,21 +70,24 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Orders</h5>
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group me-2" role="group">
-                        <button type="button" class="btn btn-outline-primary btn-sm" id="exportBtn">
-                            <svg class="icon me-1">
-                                <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-cloud-download') }}"></use>
-                            </svg>
-                            Export
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshBtn">
-                            <svg class="icon me-1">
-                                <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-reload') }}"></use>
-                            </svg>
-                            Refresh
-                        </button>
+                <div class="d-flex align-items-center">
+                    <div class="btn-toolbar me-3" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary btn-sm" id="exportBtn">
+                                <svg class="icon me-1">
+                                    <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-cloud-download') }}"></use>
+                                </svg>
+                                Export
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshBtn">
+                                <svg class="icon me-1">
+                                    <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-reload') }}"></use>
+                                </svg>
+                                Refresh
+                            </button>
+                        </div>
                     </div>
+                    <x-per-page-selector :perPage="$perPage" />
                 </div>
             </div>
         </div>
@@ -295,7 +298,12 @@
 
                 <!-- Pagination -->
                 <div class="card-footer">
-                    {{ $orders->appends(request()->query())->links() }}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-muted">
+                            Showing {{ $orders->firstItem() ?? 0 }} to {{ $orders->lastItem() ?? 0 }} of {{ $orders->total() }} orders
+                        </div>
+                        {{ $orders->appends(request()->query())->links() }}
+                    </div>
                 </div>
             @else
                 <div class="card-body text-center py-5">

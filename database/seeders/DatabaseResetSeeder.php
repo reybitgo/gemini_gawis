@@ -70,8 +70,8 @@ class DatabaseResetSeeder extends Seeder
         $this->updateNetworkStatusForExistingUsers();
 
         $this->command->info('✅ Database reset completed successfully!');
-        $this->command->info('👤 Admin: admin@gawisherbal.com / Admin123!@#');
-        $this->command->info('👤 Member: member@gawisherbal.com / Member123!@#');
+        $this->command->info('👤 Admin: admin / admin@gawisherbal.com / Admin123!@#');
+        $this->command->info('👤 Member: member / member@gawisherbal.com / Member123!@#');
         $this->command->info('⚙️  System settings preserved');
         $this->command->info('⚙️  Application settings preserved');
         $this->command->info('📦 Preloaded packages restored with MLM settings');

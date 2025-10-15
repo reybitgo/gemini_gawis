@@ -122,23 +122,7 @@ class Wallet extends Model
 
             $this->update(['last_transaction_at' => now()]);
 
-            // Create transaction record
-            Transaction::create([
-                'user_id' => $this->user_id,
-                'type' => 'mlm_commission',
-                'amount' => $amount,
-                'description' => $description,
-                'status' => 'completed',
-                'level' => $level,
-                'source_order_id' => $sourceOrderId,
-                'source_type' => 'mlm',
-                'metadata' => json_encode([
-                    'level' => $level,
-                    'source_order_id' => $sourceOrderId,
-                    'credited_to' => 'mlm_balance+withdrawable_balance',
-                    'auto_credited' => true
-                ])
-            ]);
+            
 
             \DB::commit();
             return true;
@@ -187,23 +171,7 @@ class Wallet extends Model
 
             $this->update(['last_transaction_at' => now()]);
 
-            // Create transaction record
-            Transaction::create([
-                'user_id' => $this->user_id,
-                'type' => 'unilevel_bonus',
-                'amount' => $amount,
-                'description' => $description,
-                'status' => 'completed',
-                'level' => $level,
-                'source_order_id' => $sourceOrderId,
-                'source_type' => 'unilevel',
-                'metadata' => json_encode([
-                    'level' => $level,
-                    'source_order_id' => $sourceOrderId,
-                    'credited_to' => 'unilevel_balance+withdrawable_balance',
-                    'auto_credited' => true
-                ])
-            ]);
+            
 
             \DB::commit();
             return true;

@@ -21,6 +21,7 @@
             </a>
         </li>
 
+        @auth
         @if(auth()->user()->hasRole('admin'))
             <!-- Admin Section -->
             <li class="nav-title">Administration</li>
@@ -151,6 +152,7 @@
                 </ul>
             </li>
         @endif
+        @endauth
 
         <!-- E-Wallet Section -->
         <li class="nav-title">E-Wallet</li>

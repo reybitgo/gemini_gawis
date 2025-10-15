@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    use \App\Http\Traits\HasPaginationLimit;
+
     protected CartService $cartService;
 
     public function __construct(CartService $cartService)
@@ -64,7 +66,7 @@ class ProductController extends Controller
                 $query->orderBy('sort_order')->orderBy('name');
         }
 
-        $perPage = $request->get('per_page', 12);
+        $perPage = $this->getPerPage($request, 12);
         $products = $query->paginate($perPage)->appends($request->query());
 
         // Get all unique categories for filter
@@ -81,7 +83,7 @@ class ProductController extends Controller
             $inCart[$product->id] = $this->cartService->hasProduct($product->id);
         }
 
-        return view('products.index', compact('products', 'categories', 'inCart'));
+        return view('products.index', compact('products', 'categories', 'inCart', 'perPage'));
     }
 
     /**

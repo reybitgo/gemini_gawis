@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.simple')
 
 @section('title', 'Database Reset Confirmation')
 
 @section('content')
-<div class="container-lg px-4">
+<div class="container-lg px-4 pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card border-danger">

@@ -141,8 +141,28 @@ class UnilevelBonusService
                 return false;
             }
 
-            // We need a corresponding ActivityLog method for unilevel bonuses
-            // ActivityLog::logUnilevelBonus(...);
+            // Log unilevel bonus to activity log (database)
+            Log::info('Logging Unilevel Bonus', [
+                'recipient' => $user->id,
+                'amount' => $amount,
+                'level' => $level,
+                'buyer' => $buyer->id,
+                'order' => $order->id,
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+            ]);
+
+            $log = ActivityLog::logUnilevelBonus(
+                recipient: $user,
+                amount: $amount,
+                level: $level,
+                buyer: $buyer,
+                order: $order,
+                productId: $product->id,
+                productName: $product->name
+            );
+
+            Log::info('Activity Log Created', ['log_id' => $log->id]);
 
             Log::info('Unilevel Bonus Credited', [
                 'recipient_id' => $user->id,
@@ -152,8 +172,8 @@ class UnilevelBonusService
                 'product_name' => $product->name
             ]);
 
-            // We may need a new notification class for unilevel bonuses
-            // $user->notify(new UnilevelBonusEarned($amount, $level, $buyer, $order));
+            // Send real-time notification
+            $user->notify(new UnilevelBonusEarned($amount, $level, $buyer, $order, $product));
 
             return true;
 

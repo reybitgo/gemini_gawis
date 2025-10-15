@@ -265,6 +265,11 @@ class Order extends Model
             'status' => self::STATUS_PAID,
             'paid_at' => now(),
         ]);
+
+        // Activate user's network status if they bought an MLM package
+        if ($this->orderItems()->whereHas('package', fn($q) => $q->where('is_mlm_package', true))->exists()) {
+            $this->user->activateNetwork();
+        }
     }
 
     public function markAsProcessing(): void

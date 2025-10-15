@@ -174,20 +174,23 @@
                     </svg>
                     Your Orders ({{ $orders->total() }} total)
                 </h5>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-coreui-toggle="dropdown">
-                        <svg class="icon me-1">
-                            <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-sort-ascending') }}"></use>
-                        </svg>
-                        Sort
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'created_at', 'sort_direction' => 'desc']) }}">Newest First</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'created_at', 'sort_direction' => 'asc']) }}">Oldest First</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'total_amount', 'sort_direction' => 'desc']) }}">Highest Amount</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'total_amount', 'sort_direction' => 'asc']) }}">Lowest Amount</a></li>
-                        <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'status', 'sort_direction' => 'asc']) }}">Status A-Z</a></li>
-                    </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-2">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-coreui-toggle="dropdown">
+                            <svg class="icon me-1">
+                                <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-sort-ascending') }}"></use>
+                            </svg>
+                            Sort
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'created_at', 'sort_direction' => 'desc']) }}">Newest First</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'created_at', 'sort_direction' => 'asc']) }}">Oldest First</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'total_amount', 'sort_direction' => 'desc']) }}">Highest Amount</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'total_amount', 'sort_direction' => 'asc']) }}">Lowest Amount</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort_by' => 'status', 'sort_direction' => 'asc']) }}">Status A-Z</a></li>
+                        </ul>
+                    </div>
+                    <x-per-page-selector :perPage="$perPage" />
                 </div>
             </div>
         </div>
@@ -220,8 +223,13 @@
 
     <!-- Pagination -->
     @if($orders->hasPages())
-        <div class="d-flex justify-content-center mt-4">
-            {{ $orders->appends(request()->query())->links() }}
+        <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-muted">
+                    Showing {{ $orders->firstItem() ?? 0 }} to {{ $orders->lastItem() ?? 0 }} of {{ $orders->total() }} orders
+                </div>
+                {{ $orders->appends(request()->query())->links() }}
+            </div>
         </div>
     @endif
 </div>

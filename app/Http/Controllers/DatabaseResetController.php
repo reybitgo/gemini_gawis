@@ -27,7 +27,9 @@ class DatabaseResetController extends Controller
     public function reset(Request $request)
     {
         // Check if user has admin role
-        if (!Auth::user() || !Auth::user()->hasRole('admin')) {
+        if (app()->environment('local')) {
+            // Allow access in local environment
+        } else if (!Auth::user() || !Auth::user()->hasRole('admin')) {
             Log::warning('Unauthorized database reset attempt', [
                 'user_id' => Auth::id(),
                 'ip' => $request->ip(),
@@ -50,7 +52,7 @@ class DatabaseResetController extends Controller
             // Log the reset action
             Log::info('Database reset initiated', [
                 'user_id' => Auth::id(),
-                'user_email' => Auth::user()->email,
+                'user_email' => Auth::user() ? Auth::user()->email : null,
                 'ip' => $request->ip(),
                 'timestamp' => now()
             ]);
@@ -83,7 +85,9 @@ class DatabaseResetController extends Controller
             ]);
 
             // Log out the current user since their session may be invalidated
-            Auth::logout();
+            if (Auth::check()) {
+                Auth::logout();
+            }
 
             // Invalidate the session and regenerate CSRF token
             $request->session()->invalidate();
@@ -97,10 +101,12 @@ class DatabaseResetController extends Controller
                     'redirect' => route('login'),
                     'credentials' => [
                         'admin' => [
+                            'username' => 'admin',
                             'email' => 'admin@gawisherbal.com',
                             'password' => 'Admin123!@#'
                         ],
                         'member' => [
+                            'username' => 'member',
                             'email' => 'member@gawisherbal.com',
                             'password' => 'Member123!@#'
                         ]

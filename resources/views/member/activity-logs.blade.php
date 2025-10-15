@@ -94,7 +94,7 @@
         <div class="card text-white bg-primary-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->where('level', 'INFO')->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->where('level', 'INFO')->count() }}</div>
                     <div>Info Events (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -108,7 +108,7 @@
         <div class="card text-white bg-warning-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->where('level', 'WARNING')->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->where('level', 'WARNING')->count() }}</div>
                     <div>Warnings (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -122,7 +122,7 @@
         <div class="card text-white bg-danger-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->where('level', 'ERROR')->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->where('level', 'ERROR')->count() }}</div>
                     <div>Errors (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -136,7 +136,7 @@
         <div class="card text-white bg-success-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ $logs->total() }}</div>
+                    <div class="fs-4 fw-semibold">{{ $activityLogs->total() }}</div>
                     <div>Total Entries</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -157,8 +157,8 @@
                 </svg>
                 <strong>My Activity Log</strong>
                 <small class="text-body-secondary ms-2">
-                    @if($logs->count() > 0)
-                        Showing {{ $logs->firstItem() }} to {{ $logs->lastItem() }} of {{ $logs->total() }} log entries
+                    @if($activityLogs->count() > 0)
+                        Showing {{ $activityLogs->firstItem() }} to {{ $activityLogs->lastItem() }} of {{ $activityLogs->total() }} log entries
                     @else
                         No log entries found matching the current filters
                     @endif
@@ -168,10 +168,10 @@
         </div>
     </div>
 
-    @if($logs->count() > 0)
+    @if($activityLogs->count() > 0)
         <div class="card-body p-0">
             <div class="list-group list-group-flush">
-                @foreach($logs as $log)
+                @foreach($activityLogs as $log)
                     <div class="list-group-item {{ $log['level'] == 'ERROR' ? 'bg-warning-subtle' : '' }}">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="d-flex flex-grow-1">
@@ -239,14 +239,14 @@
         </div>
 
         <!-- Pagination -->
-        @if($logs->hasPages())
+        @if($activityLogs->hasPages())
             <div class="card-footer">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="text-body-secondary small">
-                        Showing {{ $logs->firstItem() }} to {{ $logs->lastItem() }} of {{ $logs->total() }} results
+                        Showing {{ $activityLogs->firstItem() }} to {{ $activityLogs->lastItem() }} of {{ $activityLogs->total() }} results
                     </div>
                     <div>
-                        {{ $logs->appends(request()->query())->links() }}
+                        {{ $activityLogs->appends(request()->query())->links() }}
                     </div>
                 </div>
             </div>

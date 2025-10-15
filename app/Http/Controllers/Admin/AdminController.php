@@ -685,26 +685,7 @@ class AdminController extends Controller
         $perPage = $this->getPerPage($request, 15);
         $activityLogs = $query->paginate($perPage)->appends($request->query());
 
-        // Transform database records to match the view format
-        $logs = $activityLogs->through(function($log) {
-            return [
-                'id' => $log->id,
-                'timestamp' => $log->created_at,
-                'level' => $log->level,
-                'type' => $log->type,
-                'event' => $log->event,
-                'message' => $log->message,
-                'user_id' => $log->user_id,
-                'ip_address' => $log->ip_address ?? 'N/A',
-                'user_agent' => $log->user_agent ?? 'N/A',
-                'metadata' => $log->metadata,
-                'transaction_id' => $log->transaction_id,
-                'order_id' => $log->order_id,
-                'related_user_id' => $log->related_user_id,
-            ];
-        });
-
-        return view('admin.logs', compact('logs', 'logType', 'search', 'level', 'perPage'));
+        return view('admin.logs', compact('activityLogs', 'logType', 'search', 'level', 'perPage'));
     }
 
     public function exportLogs(Request $request)

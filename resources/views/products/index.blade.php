@@ -17,7 +17,7 @@
 
     <!-- Filters and Search -->
     <div class="row g-3 mb-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <form method="GET" action="{{ route('products.index') }}" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control" placeholder="Search products..."
                        value="{{ request('search') }}">
@@ -54,7 +54,7 @@
                         {{ request('min_price') == 1000 && !request('max_price') ? 'selected' : '' }}>₱1,000+</option>
             </select>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <select class="form-select" onchange="location = this.value;">
                 <option value="{{ route('products.index', request()->except('sort')) }}"
                         {{ !request('sort') ? 'selected' : '' }}>Sort by Default</option>
@@ -67,6 +67,9 @@
                 <option value="{{ route('products.index', ['sort' => 'newest'] + request()->except('sort')) }}"
                         {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
             </select>
+        </div>
+        <div class="col-md-2">
+            <x-per-page-selector :perPage="$perPage" />
         </div>
     </div>
 
@@ -170,9 +173,14 @@
             @endforeach
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-12">
-                {{ $products->appends(request()->query())->links() }}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-muted">
+                        Showing {{ $products->firstItem() ?? 0 }} to {{ $products->lastItem() ?? 0 }} of {{ $products->total() }} products
+                    </div>
+                    {{ $products->appends(request()->query())->links() }}
+                </div>
             </div>
         </div>
     @else

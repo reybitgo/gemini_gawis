@@ -85,7 +85,7 @@
         <div class="card text-white bg-primary-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->where('level', 'INFO')->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->where('level', 'INFO')->count() }}</div>
                     <div>Info Events (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -99,7 +99,7 @@
         <div class="card text-white bg-warning-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->where('level', 'WARNING')->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->where('level', 'WARNING')->count() }}</div>
                     <div>Warnings (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -113,7 +113,7 @@
         <div class="card text-white bg-danger-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ collect($logs->items())->whereIn('level', ['ERROR', 'CRITICAL'])->count() }}</div>
+                    <div class="fs-4 fw-semibold">{{ collect($activityLogs->items())->whereIn('level', ['ERROR', 'CRITICAL'])->count() }}</div>
                     <div>Errors (Page)</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -127,7 +127,7 @@
         <div class="card text-white bg-success-gradient">
             <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                 <div>
-                    <div class="fs-4 fw-semibold">{{ $logs->total() }}</div>
+                    <div class="fs-4 fw-semibold">{{ $activityLogs->total() }}</div>
                     <div>Total Entries</div>
                 </div>
                 <svg class="icon icon-3xl">
@@ -148,8 +148,8 @@
                 </svg>
                 <strong>System Activity Log</strong>
                 <small class="text-body-secondary ms-2">
-                    @if($logs->count() > 0)
-                        Showing {{ $logs->firstItem() }} to {{ $logs->lastItem() }} of {{ $logs->total() }} log entries
+                    @if($activityLogs->count() > 0)
+                        Showing {{ $activityLogs->firstItem() }} to {{ $activityLogs->lastItem() }} of {{ $activityLogs->total() }} log entries
                     @else
                         No log entries found matching the current filters
                     @endif
@@ -159,10 +159,10 @@
         </div>
     </div>
 
-    @if($logs->count() > 0)
+    @if($activityLogs->count() > 0)
         <div class="card-body p-0">
             <div class="list-group list-group-flush">
-                @foreach($logs as $log)
+                @foreach($activityLogs as $log)
                     <div class="list-group-item {{ $log['level'] == 'CRITICAL' ? 'bg-danger-subtle' : ($log['level'] == 'ERROR' ? 'bg-warning-subtle' : '') }}">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="d-flex flex-grow-1">
@@ -205,7 +205,11 @@
                                             <svg class="icon me-1">
                                                 <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-clock') }}"></use>
                                             </svg>
-                                            {{ $log['timestamp']->format('M d, Y g:i A') }}
+                                            @if($log['timestamp'])
+                                                {{ $log['timestamp']->format('M d, Y g:i A') }}
+                                            @else
+                                                N/A
+                                            @endif
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <svg class="icon me-1">
@@ -243,14 +247,14 @@
         </div>
 
         <!-- Pagination -->
-        @if($logs->hasPages())
+        @if($activityLogs->hasPages())
             <div class="card-footer">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="text-body-secondary small">
-                        Showing {{ $logs->firstItem() }} to {{ $logs->lastItem() }} of {{ $logs->total() }} results
+                        Showing {{ $activityLogs->firstItem() }} to {{ $activityLogs->lastItem() }} of {{ $activityLogs->total() }} results
                     </div>
                     <div>
-                        {{ $logs->appends(request()->query())->links() }}
+                        {{ $activityLogs->appends(request()->query())->links() }}
                     </div>
                 </div>
             </div>

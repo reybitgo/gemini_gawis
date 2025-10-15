@@ -203,10 +203,10 @@
                 <div class="mt-2">
                     @foreach($order->orderItems as $item)
                         <div class="d-flex align-items-center py-2 border-top">
-                            <img src="{{ $item->package_image_url }}" alt="{{ $item->package_name }}"
+                            <img src="{{ $item->item_image_url }}" alt="{{ $item->item_name }}"
                                  class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;">
                             <div class="flex-grow-1">
-                                <div class="fw-semibold">{{ $item->package_name }}</div>
+                                <div class="fw-semibold">{{ $item->item_name }}</div>
                                 <small class="text-muted">
                                     Qty: {{ $item->quantity }} × {{ $item->formatted_unit_price }} = {{ $item->formatted_total_price }}
                                 </small>
@@ -305,10 +305,10 @@
                             <h6 class="mb-2">Items to be added:</h6>
                             @foreach($order->orderItems->take(3) as $item)
                                 <div class="d-flex align-items-center py-1">
-                                    <img src="{{ $item->package_image_url }}" alt="{{ $item->package_name }}"
+                                    <img src="{{ $item->item_image_url }}" alt="{{ $item->item_name }}"
                                          class="rounded me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                     <div class="flex-grow-1">
-                                        <small class="fw-semibold">{{ $item->package_name }}</small>
+                                        <small class="fw-semibold">{{ $item->item_name }}</small>
                                         <small class="text-muted d-block">Qty: {{ $item->quantity }}</small>
                                     </div>
                                     <small class="text-muted">{{ $item->formatted_total_price }}</small>

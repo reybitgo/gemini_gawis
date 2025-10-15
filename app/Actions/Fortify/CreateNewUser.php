@@ -100,6 +100,26 @@ class CreateNewUser implements CreatesNewUsers
 
         try {
             $user = User::create($userData);
+
+            // Log new user registration
+            \App\Models\ActivityLog::createLog(
+                type: 'system',
+                event: 'user_registered',
+                message: sprintf('New user %s registered.', $user->username),
+                userId: $user->id
+            );
+
+            // Log sponsorship
+            if ($sponsor) {
+                \App\Models\ActivityLog::createLog(
+                    type: 'mlm',
+                    event: 'sponsorship',
+                    message: sprintf('%s is now sponsored by %s.', $user->username, $sponsor->username),
+                    userId: $user->id,
+                    relatedUserId: $sponsor->id
+                );
+            }
+
         } catch (\InvalidArgumentException $e) {
             // Convert circular reference exception to validation error
             throw \Illuminate\Validation\ValidationException::withMessages([

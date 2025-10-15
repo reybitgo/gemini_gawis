@@ -281,6 +281,7 @@
                 <strong>All Transactions</strong>
                 <small class="text-body-secondary ms-2">Complete transaction history with filtering options</small>
             </div>
+            <x-per-page-selector :perPage="$perPage" />
         </div>
     </div>
 

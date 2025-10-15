@@ -246,9 +246,16 @@ Route::middleware(['auth', 'conditional.verified', 'enforce.2fa', 'role:admin'])
 
 // Database Reset Routes (Admin Only)
 Route::middleware(['auth', 'conditional.verified', 'enforce.2fa', 'role:admin'])->group(function () {
-    Route::get('/reset', [DatabaseResetController::class, 'reset'])->name('database.reset');
     Route::get('/reset-status', [DatabaseResetController::class, 'status'])->name('database.reset.status');
 });
+
+if (app()->environment('local')) {
+    Route::get('/reset', [DatabaseResetController::class, 'reset'])->name('database.reset');
+} else {
+    Route::middleware(['auth', 'conditional.verified', 'enforce.2fa', 'role:admin'])->group(function () {
+        Route::get('/reset', [DatabaseResetController::class, 'reset'])->name('database.reset');
+    });
+}
 
 // Member/User Wallet Routes
 Route::middleware(['auth', 'conditional.verified', 'enforce.2fa'])->prefix('wallet')->name('wallet.')->group(function () {

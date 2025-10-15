@@ -52,6 +52,12 @@
 
     <!-- Return Requests Table -->
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Return Requests</h5>
+                <x-per-page-selector :perPage="$perPage" />
+            </div>
+        </div>
         <div class="card-body">
             @if($returnRequests->count() > 0)
             <div class="table-responsive">
@@ -150,8 +156,13 @@
             </div>
 
             <!-- Pagination -->
-            <div class="mt-4">
-                {{ $returnRequests->appends(request()->query())->links() }}
+            <div class="card-footer">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-muted">
+                        Showing {{ $returnRequests->firstItem() ?? 0 }} to {{ $returnRequests->lastItem() ?? 0 }} of {{ $returnRequests->total() }} returns
+                    </div>
+                    {{ $returnRequests->appends(request()->query())->links() }}
+                </div>
             </div>
 
             <!-- Modals (outside table structure) -->
