@@ -75,6 +75,10 @@
                                     </a>
                                 </p>
                             </div>
+
+                            <div class="text-center mt-3">
+                                <a href="{{ url('/') }}" class="text-decoration-none">&larr; Back to Home</a>
+                            </div>
                         </form>
                     </div>
                 </div>

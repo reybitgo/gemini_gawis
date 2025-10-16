@@ -13,7 +13,10 @@
                             <img class="logo-dark" src="{{ asset('coreui-template/assets/brand/gawis_logo.png') }}" width="110" height="39" alt="{{ config('app.name', 'Gawis iHerbal') }} Logo" />
                             <img class="logo-light" src="{{ asset('coreui-template/assets/brand/gawis_logo_light.png') }}" width="110" height="39" alt="{{ config('app.name', 'Gawis iHerbal') }} Logo" />
                         </div>
-                        <h1>Register</h1>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h1>Register</h1>
+                            <a href="{{ url('/') }}" class="small">&larr; Back to Home</a>
+                        </div>
                         <p class="text-body-secondary">Create your account</p>
 
                         @if ($errors->any())
