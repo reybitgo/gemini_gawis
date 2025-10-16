@@ -120,6 +120,15 @@
                         <i class="cil-user-plus"></i> Register Member
                     </a>
                 </div>
+                <hr>
+                <div class="d-flex justify-content-around">
+                    <a href="{{ route('member.unilevel.genealogy') }}" class="btn btn-sm btn-outline-info">
+                        <i class="cil-sitemap"></i> Unilevel Genealogy
+                    </a>
+                    <a href="{{ route('member.mlm.genealogy') }}" class="btn btn-sm btn-outline-success">
+                        <i class="cil-sitemap"></i> MLM Genealogy
+                    </a>
+                </div>
             </div>
         </div>
     </div>

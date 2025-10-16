@@ -18,11 +18,17 @@ class GenealogyController extends Controller
 
     public function showUnilevel()
     {
-        // Logic to be implemented in a later step
+        $user = Auth::user();
+        $tree = $this->genealogyService->getGenealogyTree($user, 'unilevel_bonus');
+
+        return view('member.genealogy.unilevel', ['tree' => $tree]);
     }
 
     public function showMlm()
     {
-        // Logic to be implemented in a later step
+        $user = Auth::user();
+        $tree = $this->genealogyService->getGenealogyTree($user, 'mlm_commission');
+
+        return view('member.genealogy.mlm', ['tree' => $tree]);
     }
 }

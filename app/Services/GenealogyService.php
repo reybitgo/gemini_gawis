@@ -60,7 +60,7 @@ class GenealogyService
                 INNER JOIN downline_cte d ON u.sponsor_id = d.id
                 WHERE d.level < ?
             )
-            SELECT u.id, u.fullname, u.username, u.created_at as join_date, u.mlm_status as status, cte.level, u.sponsor_id
+            SELECT u.id, u.fullname, u.username, u.created_at as join_date, u.network_status as status, cte.level, u.sponsor_id
             FROM users u
             JOIN downline_cte cte ON u.id = cte.id
             ORDER BY cte.level, u.fullname;
