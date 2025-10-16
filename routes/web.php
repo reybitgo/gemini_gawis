@@ -35,6 +35,10 @@ Route::get('/opportunity', function () {
     return view('frontend.opportunity');
 })->name('frontend.opportunity');
 
+Route::get('/our-products', function () {
+    return view('frontend.products');
+})->name('frontend.our-products');
+
 
 
 Route::get('/test-login', function () {

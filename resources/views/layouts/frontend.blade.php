@@ -117,7 +117,7 @@
                                         <a class="nav-link" href="{{ route('frontend.opportunity') }}">Opportunity</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('products.index') }}">Products</a>
+                                        <a class="nav-link" href="{{ route('frontend.our-products') }}">Products</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
