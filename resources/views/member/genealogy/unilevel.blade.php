@@ -11,8 +11,15 @@
 
         <div class="card">
             <div class="card-body">
-                <p>Genealogy tree will be rendered here.</p>
-                {{-- The <x-genealogy-node> component will be used here in the next phase --}}
+                @if (!empty($tree))
+                    <ul class="genealogy-tree">
+                        @foreach ($tree as $member)
+                            <x-genealogy-node :member="$member" :earnings-label="'Unilevel Bonus'" />
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="text-center text-muted">You do not have any downlines yet.</p>
+                @endif
             </div>
         </div>
     </div>
