@@ -63,6 +63,7 @@ body{
 	line-height: 1em;
 	color: var(--text-color);
 	background: var(--white-color);
+	overflow-x: hidden;
 }
 
 ::-webkit-scrollbar-track{
@@ -125,6 +126,7 @@ a:focus{
 html,
 body{
 	width: 100%;
+	overflow-x: hidden !important;
 }
 
 .container{
@@ -763,7 +765,6 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	right: -30px;
 	top: 20%;
 	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
@@ -1522,7 +1523,6 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	right: -30px;
 	top: 5%;
 	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
@@ -2019,7 +2019,6 @@ header.main-header .header-sticky.active{
 	content: '';
     position: absolute;
     bottom: 5px;
-    right: -30px;
     transform: translateX(100%);
     background: url('../images/cta-box-arrow.svg');
     background-repeat: no-repeat;
@@ -2558,7 +2557,6 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	right: -30px;
 	top: 10%;
 	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
@@ -2569,7 +2567,6 @@ header.main-header .header-sticky.active{
 }
 
 .about-footer{
-    margin-right: 200px;
 }
 
 .footer-logo{
@@ -2838,7 +2835,6 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	right: -10px;
 	top: 28%;
 	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
@@ -2912,7 +2908,6 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	right: -30px;
 	top: 5%;
 	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
