@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminMlmSettingsController;
 use App\Http\Controllers\Admin\AdminUnilevelSettingsController;
 use App\Http\Controllers\Member\WalletController;
 use App\Http\Controllers\Member\UserActivityController;
+use App\Http\Controllers\Member\GenealogyController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -135,6 +136,10 @@ Route::middleware(['auth', 'enforce.2fa'])->group(function () {
         Route::get('/', [UserActivityController::class, 'index'])->name('index');
         Route::post('/export', [UserActivityController::class, 'export'])->name('export');
     });
+
+    // Genealogy Routes
+    Route::get('/member/unilevel/genealogy', [GenealogyController::class, 'showUnilevel'])->name('member.unilevel.genealogy');
+    Route::get('/member/mlm/genealogy', [GenealogyController::class, 'showMlm'])->name('member.mlm.genealogy');
 });
 
 // Admin Routes
