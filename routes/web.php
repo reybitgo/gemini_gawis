@@ -20,7 +20,7 @@ use App\Http\Controllers\ReferralController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('frontend.index');
 });
 
 Route::get('/test-login', function () {
