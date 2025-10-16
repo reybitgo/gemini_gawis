@@ -98,7 +98,7 @@
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
                         <!-- Logo Start -->
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="{{ url('/') }}">
                             <img src="{{ asset('frontend/images/logo.png') }}" height="46" alt="Logo" />
                         </a>
                         <!-- Logo End -->
@@ -108,48 +108,38 @@
                             <div class="nav-menu-wrapper">
                                 <ul class="navbar-nav mr-auto" id="menu">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="index.html"
-                                            >Home</a
-                                        >
+                                        <a class="nav-link" href="{{ url('/') }}">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="about.html"
-                                            >About</a
-                                        >
+                                        <a class="nav-link" href="#">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                            class="nav-link"
-                                            href="opportunity.html"
-                                            >Opportunity</a
-                                        >
+                                        <a class="nav-link" href="#">Opportunity</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="products.html"
-                                            >Products</a
-                                        >
+                                        <a class="nav-link" href="#">Products</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="contact.html"
-                                            >Contact</a
-                                        >
+                                        <a class="nav-link" href="#">Contact</a>
                                     </li>
+                                    @guest
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/login"
-                                            >Account</a
-                                        >
+                                        <a class="nav-link" href="{{ route('login') }}">Account</a>
                                     </li>
+                                    @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                                    </li>
+                                    @endguest
                                 </ul>
                             </div>
 
                             <!-- Header Contact Btn Start -->
+                            @guest
                             <div class="header-contact-btn">
-                                <a
-                                    href="/register"
-                                    class="btn-default btn-highlighted"
-                                    >Join Now</a
-                                >
+                                <a href="{{ route('register') }}" class="btn-default btn-highlighted">Join Now</a>
                             </div>
+                            @endguest
                             <!-- Header Contact Btn End -->
                         </div>
                         <!-- Main Menu End -->
@@ -207,12 +197,12 @@
                                 data-wow-delay="0.4s"
                             >
                                 <a
-                                    href="opportunity.html"
+                                    href="#"
                                     class="btn-default btn-highlighted"
                                     >Learn More</a
                                 >
                                 <a
-                                    href="contact.html"
+                                    href="#"
                                     class="btn-default border-btn"
                                     >Contact Us</a
                                 >
@@ -362,7 +352,7 @@
                             >
                                 <!-- About Us Button Start -->
                                 <div class="about-us-btn">
-                                    <a href="about.html" class="btn-default"
+                                    <a href="#" class="btn-default"
                                         >more about us</a
                                     >
                                 </div>
@@ -421,7 +411,7 @@
                             class="section-btn wow fadeInUp"
                             data-wow-delay="0.2s"
                         >
-                            <a href="products.html" class="btn-default"
+                            <a href="#" class="btn-default"
                                 >view all products</a
                             >
                         </div>
@@ -599,12 +589,12 @@
                         <div class="footer-links">
                             <h3>Quick link</h3>
                             <ul>
-                                <li><a href="index.html">home</a></li>
-                                <li><a href="about.html">about us</a></li>
+                                <li><a href="{{ url('/') }}">home</a></li>
+                                <li><a href="#">about us</a></li>
                                 <li>
-                                    <a href="opportunity.html">Opportunity</a>
+                                    <a href="#">Opportunity</a>
                                 </li>
-                                <li><a href="products.html">Products</a></li>
+                                <li><a href="#">Products</a></li>
                             </ul>
                         </div>
                         <!-- Footer Links End -->
@@ -618,7 +608,7 @@
                                 <li><a href="#">Help</a></li>
                                 <li><a href="#">Term & Condition</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="contact.html">Contact us</a></li>
+                                <li><a href="#">Contact us</a></li>
                             </ul>
                         </div>
                         <!-- Footer Links End -->
