@@ -1,727 +1,288 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Meta -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1"
-        />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="Gawis" />
-        <!-- Page Title -->
-        <title>Gawis iHerbal - Financial Wellness</title>
-        <!-- Favicon Icon -->
-        <link
-            rel="shortcut icon"
-            type="image/x-icon"
-            href="{{ asset('frontend/images/favicon.png') }}"
-        />
-        <!-- Google Fonts Css-->
-        <link rel="preconnect" href="https://fonts.googleapis.com/" />
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
-            rel="stylesheet"
-        />
-        <!-- Bootstrap Css -->
-        <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
-        <!-- SlickNav Css -->
-        <link href="{{ asset('frontend/css/slicknav.min.css') }}" rel="stylesheet" />
-        <!-- Swiper Css -->
-        <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
-        <!-- Font Awesome Icon Css-->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-        <!-- Animated Css -->
-        <link href="{{ asset('frontend/css/animate.css') }}" rel="stylesheet" />
-        <!-- Magnific Popup Core Css File -->
-        <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}" />
-        <!-- Mouse Cursor Css File -->
-        <link rel="stylesheet" href="{{ asset('frontend/css/mousecursor.css') }}" />
-        <!-- Main Custom Css -->
-        <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" media="screen" />
-        <style>
-            #scrollTopBtn {
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                z-index: 99;
-                border: 2px solid white;
-                outline: none;
-                background-color: transparent;
-                color: white;
-                cursor: pointer;
-                padding: 0;
-                border-radius: 50%;
-                font-size: 24px;
-                width: 55px;
-                height: 55px;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            }
+@extends('layouts.frontend')
 
-            #scrollTopBtn:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                border-color: #669933;
-                color: #669933;
-                transform: translateY(-5px);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Preloader Start -->
-        <div class="preloader">
-            <div class="loading-container">
-                <div class="loading"></div>
-                <div id="loading-icon">
-                    <img src="{{ asset('frontend/images/loader.png') }}" height="50" alt="" />
-                </div>
-            </div>
-        </div>
-        <!-- Preloader End -->
-
-        <!-- Header Start -->
-        <header class="main-header">
-            <div class="header-sticky">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container">
-                        <!-- Logo Start -->
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            <img src="{{ asset('frontend/images/logo.png') }}" height="46" alt="Logo" />
-                        </a>
-                        <!-- Logo End -->
-
-                        <!-- Main Menu Start -->
-                        <div class="collapse navbar-collapse main-menu">
-                            <div class="nav-menu-wrapper">
-                                <ul class="navbar-nav mr-auto" id="menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ url('/') }}">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Opportunity</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Products</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact</a>
-                                    </li>
-                                    @guest
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">Account</a>
-                                    </li>
-                                    @else
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                                    </li>
-                                    @endguest
-                                </ul>
-                            </div>
-
-                            <!-- Header Contact Btn Start -->
-                            @guest
-                            <div class="header-contact-btn">
-                                <a href="{{ route('register') }}" class="btn-default btn-highlighted">Join Now</a>
-                            </div>
-                            @endguest
-                            <!-- Header Contact Btn End -->
-                        </div>
-                        <!-- Main Menu End -->
-                        <div class="navbar-toggle"></div>
-                    </div>
-                </nav>
-                <div class="responsive-menu"></div>
-            </div>
-        </header>
-        <!-- Header End -->
-
-        <!-- Hero Section Start -->
-        <div class="hero dark-section">
-            <div class="hero-overlay"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- Hero Content Start -->
-                        <div class="hero-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">
-                                    Welcome to Gawis iHerbal
-                                </h3>
-                                <h1
-                                    class="text-anime-style-3"
-                                    data-cursor="-opaque"
-                                >
-                                    Your Path to <span>Financial Wellness</span>
-                                </h1>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- Hero List Start -->
-                            <div
-                                class="hero-list wow fadeInUp"
-                                data-wow-delay="0.2s"
-                            >
-                                <ul>
-                                    <li>
-                                        Unlock your earning potential with our
-                                        Unilevel MLM plan.
-                                    </li>
-                                    <li>
-                                        High-quality products and a rewarding
-                                        compensation plan.
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Hero List End -->
-
-                            <!-- Hero Button Start -->
-                            <div
-                                class="hero-btn wow fadeInUp"
-                                data-wow-delay="0.4s"
-                            >
-                                <a
-                                    href="#"
-                                    class="btn-default btn-highlighted"
-                                    >Learn More</a
-                                >
-                                <a
-                                    href="#"
-                                    class="btn-default border-btn"
-                                    >Contact Us</a
-                                >
-                            </div>
-                            <!-- Hero Button End -->
-                        </div>
-                        <!-- Hero Content End -->
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- Hero Image Start -->
-                        <div class="hero-image">
-                            <figure>
-                                <img src="{{ asset('frontend/images/hero-image.png') }}" alt="" />
-                            </figure>
-                        </div>
-                        <!-- Hero Image End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero Section End -->
-
-        <!-- Our Scrolling Ticker Section Start -->
-        <div class="our-scrolling-ticker">
-            <!-- Scrolling Ticker Start -->
-            <div class="scrolling-ticker-box">
-                <div class="scrolling-content">
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level
-                        Commission Structure</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel
-                        Bonus System</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time
-                        Processing</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated
-                        E-Wallet</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium
-                        Quality Products</span
-                    >
-                </div>
-
-                <div class="scrolling-content">
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level
-                        Commission Structure</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel
-                        Bonus System</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time
-                        Processing</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated
-                        E-Wallet</span
-                    >
-                    <span
-                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium
-                        Quality Products</span
-                    >
-                </div>
-            </div>
-        </div>
-        <!-- Our Scrolling Ticker Section End -->
-
-        <!-- About Us Section Start -->
-        <div class="about-us">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- About Images Start -->
-                        <div class="about-images">
-                            <figure>
-                                <img src="{{ asset('frontend/images/about-img.png') }}" alt="" />
-                            </figure>
-                        </div>
-                        <!-- About Images End -->
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- About us Content Start -->
-                        <div class="about-us-content">
-                            <!-- Section Title Start -->
-                            <div class="section-title">
-                                <h3 class="wow fadeInUp">about us</h3>
-                                <h2
-                                    class="text-anime-style-3"
-                                    data-cursor="-opaque"
-                                >
-                                    Committed to your
-                                    <span>health and success!</span>
-                                </h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                    We provide a unique opportunity for
-                                    individuals to build their own business
-                                    through our Unilevel MLM platform, offering
-                                    high-quality health and wellness products.
-                                </p>
-                            </div>
-                            <!-- Section Title End -->
-
-                            <!-- About Us Body Start -->
-                            <div
-                                class="about-us-body wow fadeInUp"
-                                data-wow-delay="0.4s"
-                            >
-                                <!-- About Us List Start -->
-                                <div class="about-us-list">
-                                    <ul>
-                                        <li>Pure & Natural Ingredients</li>
-                                        <li>Rewarding Compensation Plan</li>
-                                    </ul>
-                                </div>
-                                <!-- About Us List End -->
-
-                                <!-- About Body Item Start -->
-                                <div class="about-body-item">
-                                    <div class="icon-box">
-                                        <img
-                                            src="{{ asset('frontend/images/icon-about-body.svg') }}"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div class="about-body-item-title">
-                                        <h3>100% Natural & Pure Ingredients</h3>
-                                    </div>
-                                </div>
-                                <!-- About Body Item End -->
-                            </div>
-                            <!-- About Us Body End -->
-
-                            <!-- About Us Footer Start -->
-                            <div
-                                class="about-us-footer wow fadeInUp"
-                                data-wow-delay="0.6s"
-                            >
-                                <!-- About Us Button Start -->
-                                <div class="about-us-btn">
-                                    <a href="#" class="btn-default"
-                                        >more about us</a
-                                    >
-                                </div>
-                                <!-- About Us Button End -->
-
-                                <!-- About Contact Box Start -->
-                                <div class="about-contact-box">
-                                    <div class="icon-box">
-                                        <img
-    src="{{ asset('frontend/images/icon-phone.svg') }}"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div class="about-contact-box-content">
-                                        <p>Support Any Time</p>
-                                        <h3>
-                                            <a href="tel:985852357"
-                                                >+01 - 985 852 357</a
-                                            >
-                                        </h3>
-                                    </div>
-                                </div>
-                                <!-- About Contact Box End -->
-                            </div>
-                            <!-- About Us Footer End -->
-                        </div>
-                        <!-- About us Content End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About Us Section End -->
-
-        <!-- Our Products Section Start -->
-        <div class="our-products">
-            <div class="container">
-                <div class="row section-row align-items-center">
-                    <div class="col-lg-6">
+@section('content')
+    <!-- Hero Section Start -->
+    <div class="hero dark-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Hero Content Start -->
+                    <div class="hero-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">our products</h3>
-                            <h2
-                                class="text-anime-style-3"
-                                data-cursor="-opaque"
-                            >
-                                Powerful supplements
-                                <span>for a healthier you!</span>
-                            </h2>
+                            <h3 class="wow fadeInUp">Welcome to Gawis iHerbal</h3>
+                            <h1 class="text-anime-style-3" data-cursor="-opaque">
+                                Your Path to <span>Financial Wellness</span>
+                            </h1>
                         </div>
                         <!-- Section Title End -->
-                    </div>
 
-                    <div class="col-lg-6">
-                        <!-- Section Button Start -->
-                        <div
-                            class="section-btn wow fadeInUp"
-                            data-wow-delay="0.2s"
-                        >
-                            <a href="#" class="btn-default"
-                                >view all products</a
-                            >
+                        <!-- Hero List Start -->
+                        <div class="hero-list wow fadeInUp" data-wow-delay="0.2s">
+                            <ul>
+                                <li>
+                                    Unlock your earning potential with our Unilevel MLM plan.
+                                </li>
+                                <li>
+                                    High-quality products and a rewarding compensation plan.
+                                </li>
+                            </ul>
                         </div>
-                        <!-- Section Button End -->
+                        <!-- Hero List End -->
+
+                        <!-- Hero Button Start -->
+                        <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
+                            <a href="#" class="btn-default btn-highlighted">Learn More</a>
+                            <a href="#" class="btn-default border-btn">Contact Us</a>
+                        </div>
+                        <!-- Hero Button End -->
                     </div>
+                    <!-- Hero Content End -->
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Product Slider Start -->
-                        <div class="product-slider">
-                            <div class="swiper">
-                                <div class="swiper-wrapper">
-                                    <!-- Product Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="product-item">
-                                            <div class="product-image">
-                                                <figure class="image-anime">
-                                                    <img
-                                                        src="{{ asset('frontend/images/product-image-1.jpg') }}"
-                                                        alt=""
-                                                    />
-                                                </figure>
-                                            </div>
-                                            <div class="product-title">
-                                                <h3>Starter Package</h3>
-                                            </div>
-                                            <div class="product-item-body">
-                                                <div class="product-rating">
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                </div>
-                                                <div class="product-price">
-                                                    <p>₱1,500.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product Slide End -->
-
-                                    <!-- Product Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="product-item">
-                                            <div class="product-image">
-                                                <figure class="image-anime">
-                                                    <img
-                                                        src="{{ asset('frontend/images/product-image-2.jpg') }}"
-                                                        alt=""
-                                                    />
-                                                </figure>
-                                            </div>
-                                            <div class="product-title">
-                                                <h3>Consumable Product A</h3>
-                                            </div>
-                                            <div class="product-item-body">
-                                                <div class="product-rating">
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                </div>
-                                                <div class="product-price">
-                                                    <p>₱500.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product Slide End -->
-
-                                    <!-- Product Slide Start -->
-                                    <div class="swiper-slide">
-                                        <div class="product-item">
-                                            <div class="product-image">
-                                                <figure class="image-anime">
-                                                    <img
-                                                        src="{{ asset('frontend/images/product-image-3.jpg') }}"
-                                                        alt=""
-                                                    />
-                                                </figure>
-                                            </div>
-                                            <div class="product-title">
-                                                <h3>Consumable Product B</h3>
-                                            </div>
-                                            <div class="product-item-body">
-                                                <div class="product-rating">
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                    <i
-                                                        class="fa-solid fa-star"
-                                                    ></i>
-                                                </div>
-                                                <div class="product-price">
-                                                    <p>₱750.00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Product Slide End -->
-                                </div>
-                                <div class="product-btn">
-                                    <div class="product-button-prev"></div>
-                                    <div class="product-button-next"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Testimonial Slider End -->
+                <div class="col-lg-6">
+                    <!-- Hero Image Start -->
+                    <div class="hero-image">
+                        <figure>
+                            <img src="{{ asset('frontend/images/hero-image.png') }}" alt="" />
+                        </figure>
                     </div>
+                    <!-- Hero Image End -->
                 </div>
             </div>
         </div>
-        <!-- Our Product Section End -->
+    </div>
+    <!-- Hero Section End -->
 
-        <!-- Main Footer Start -->
-        <footer class="main-footer dark-section">
-            <div class="footer-overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <!-- About Footer Start -->
-                        <div class="about-footer">
-                            <!-- Footer Logo Start -->
-                            <div class="footer-logo">
-                                <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
+    <!-- Our Scrolling Ticker Section Start -->
+    <div class="our-scrolling-ticker">
+        <!-- Scrolling Ticker Start -->
+        <div class="scrolling-ticker-box">
+            <div class="scrolling-content">
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level Commission Structure</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel Bonus System</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time Processing</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated E-Wallet</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium Quality Products</span>
+            </div>
+
+            <div class="scrolling-content">
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level Commission Structure</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel Bonus System</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time Processing</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated E-Wallet</span>
+                <span><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium Quality Products</span>
+            </div>
+        </div>
+    </div>
+    <!-- Our Scrolling Ticker Section End -->
+
+    <!-- About Us Section Start -->
+    <div class="about-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- About Images Start -->
+                    <div class="about-images">
+                        <figure>
+                            <img src="{{ asset('frontend/images/about-img.png') }}" alt="" />
+                        </figure>
+                    </div>
+                    <!-- About Images End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- About us Content Start -->
+                    <div class="about-us-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">about us</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">
+                                Committed to your <span>health and success!</span>
+                            </h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                We provide a unique opportunity for individuals to build their own business through our Unilevel MLM platform, offering high-quality health and wellness products.
+                            </p>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- About Us Body Start -->
+                        <div class="about-us-body wow fadeInUp" data-wow-delay="0.4s">
+                            <!-- About Us List Start -->
+                            <div class="about-us-list">
+                                <ul>
+                                    <li>Pure & Natural Ingredients</li>
+                                    <li>Rewarding Compensation Plan</li>
+                                </ul>
                             </div>
-                            <!-- Footer Logo End -->
+                            <!-- About Us List End -->
 
-                            <!-- About Footer Content Start -->
-                            <div class="about-footer-content">
-                                <p>
-                                    We are committed to helping you achieve
-                                    optimal health and financial wellness.
-                                </p>
+                            <!-- About Body Item Start -->
+                            <div class="about-body-item">
+                                <div class="icon-box">
+                                    <img src="{{ asset('frontend/images/icon-about-body.svg') }}" alt="" />
+                                </div>
+                                <div class="about-body-item-title">
+                                    <h3>100% Natural & Pure Ingredients</h3>
+                                </div>
                             </div>
-                            <!-- About Footer Content End -->
+                            <!-- About Body Item End -->
                         </div>
-                        <!-- About Footer End -->
-                    </div>
+                        <!-- About Us Body End -->
 
-                    <div class="col-lg-2 col-md-3 col-6">
-                        <!-- Footer Links Start -->
-                        <div class="footer-links">
-                            <h3>Quick link</h3>
-                            <ul>
-                                <li><a href="{{ url('/') }}">home</a></li>
-                                <li><a href="#">about us</a></li>
-                                <li>
-                                    <a href="#">Opportunity</a>
-                                </li>
-                                <li><a href="#">Products</a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Links End -->
-                    </div>
+                        <!-- About Us Footer Start -->
+                        <div class="about-us-footer wow fadeInUp" data-wow-delay="0.6s">
+                            <!-- About Us Button Start -->
+                            <div class="about-us-btn">
+                                <a href="#" class="btn-default">more about us</a>
+                            </div>
+                            <!-- About Us Button End -->
 
-                    <div class="col-lg-2 col-md-3 col-6">
-                        <!-- Footer Links Start -->
-                        <div class="footer-links">
-                            <h3>support</h3>
-                            <ul>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Term & Condition</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Contact us</a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Links End -->
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <!-- Footer Links Start -->
-                        <div class="footer-links">
-                            <h3>Contact Us</h3>
-                            <!-- Footer Contact Item Start -->
-                            <div class="footer-contact-item">
+                            <!-- About Contact Box Start -->
+                            <div class="about-contact-box">
                                 <div class="icon-box">
                                     <img src="{{ asset('frontend/images/icon-phone.svg') }}" alt="" />
                                 </div>
-                                <div class="footer-contact-item-content">
-                                    <p>Call Us</p>
+                                <div class="about-contact-box-content">
+                                    <p>Support Any Time</p>
                                     <h3>
-                                        <a href="%2b985852357.html"
-                                            >+01 - 985 852 357</a
-                                        >
+                                        <a href="tel:985852357">+01 - 985 852 357</a>
                                     </h3>
                                 </div>
                             </div>
-                            <!-- Footer Contact Item End -->
-
-                            <!-- Footer Contact Item Start -->
-                            <div class="footer-contact-item">
-                                <div class="icon-box">
-                                    <img src="{{ asset('frontend/images/icon-mail.svg') }}" alt="" />
-                                </div>
-                                <div class="footer-contact-item-content">
-                                    <p>E-mail</p>
-                                    <h3>
-                                        <a href="mailto:info@domain.com"
-                                            >info@domain.com</a
-                                        >
-                                    </h3>
-                                </div>
-                            </div>
-                            <!-- Footer Contact Item End -->
+                            <!-- About Contact Box End -->
                         </div>
-                        <!-- Footer Links End -->
+                        <!-- About Us Footer End -->
                     </div>
-
-                    <div class="col-lg-12">
-                        <!-- Footer Copyright Text Start -->
-                        <div class="footer-copyright-text">
-                            <p>Copyright © 2025 All Rights Reserved.</p>
-                        </div>
-                        <!-- Footer Copyright Text End -->
-                    </div>
+                    <!-- About us Content End -->
                 </div>
             </div>
-        </footer>
-        <!-- Main Footer End -->
+        </div>
+    </div>
+    <!-- About Us Section End -->
 
-        <!-- Jquery Library File -->
-        <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
-        <!-- Bootstrap js file -->
-        <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-        <!-- Validator js file -->
-        <script src="{{ asset('frontend/js/validator.min.js') }}"></script>
-        <!-- SlickNav js file -->
-        <script src="{{ asset('frontend/js/jquery.slicknav.js') }}"></script>
-        <!-- Swiper js file -->
-        <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
-        <!-- Counter js file -->
-        <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
-        <!-- Magnific js file -->
-        <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
-        <!-- SmoothScroll -->
-        <script src="{{ asset('frontend/js/SmoothScroll.js') }}"></script>
-        <!-- Parallax js -->
-        <script src="{{ asset('frontend/js/parallaxie.js') }}"></script>
-        <!-- MagicCursor js file -->
-        <script src="{{ asset('frontend/js/gsap.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/magiccursor.js') }}"></script>
-        <!-- Text Effect js file -->
-        <script src="{{ asset('frontend/js/SplitText.js') }}"></script>
-        <script src="{{ asset('frontend/js/ScrollTrigger.min.js') }}"></script>
-        <!-- YTPlayer js File -->
-        <script src="{{ asset('frontend/js/jquery.mb.YTPlayer.min.js') }}"></script>
-        <!-- Wow js file -->
-        <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
-        <!-- Main Custom js file -->
-        <script src="{{ asset('frontend/js/function.js') }}"></script>
+    <!-- Our Products Section Start -->
+    <div class="our-products">
+        <div class="container">
+            <div class="row section-row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Section Title Start -->
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">our products</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">
+                            Powerful supplements <span>for a healthier you!</span>
+                        </h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
 
-        <!-- Scroll to Top Button -->
-        <button id="scrollTopBtn" title="Go to top">
-            <i class="fas fa-arrow-up"></i>
-        </button>
+                <div class="col-lg-6">
+                    <!-- Section Button Start -->
+                    <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
+                        <a href="#" class="btn-default">view all products</a>
+                    </div>
+                    <!-- Section Button End -->
+                </div>
+            </div>
 
-        <script>
-            const scrollBtn = document.getElementById("scrollTopBtn");
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Product Slider Start -->
+                    <div class="product-slider">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                <!-- Product Slide Start -->
+                                <div class="swiper-slide">
+                                    <div class="product-item">
+                                        <div class="product-image">
+                                            <figure class="image-anime">
+                                                <img src="{{ asset('frontend/images/product-image-1.jpg') }}" alt="" />
+                                            </figure>
+                                        </div>
+                                        <div class="product-title">
+                                            <h3>Starter Package</h3>
+                                        </div>
+                                        <div class="product-item-body">
+                                            <div class="product-rating">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                            <div class="product-price">
+                                                <p>₱1,500.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Slide End -->
 
-            window.onscroll = function () {
-                if (
-                    document.body.scrollTop > 300 ||
-                    document.documentElement.scrollTop > 300
-                ) {
-                    scrollBtn.style.display = "flex";
-                } else {
-                    scrollBtn.style.display = "none";
-                }
-            };
+                                <!-- Product Slide Start -->
+                                <div class="swiper-slide">
+                                    <div class="product-item">
+                                        <div class="product-image">
+                                            <figure class="image-anime">
+                                                <img src="{{ asset('frontend/images/product-image-2.jpg') }}" alt="" />
+                                            </figure>
+                                        </div>
+                                        <div class="product-title">
+                                            <h3>Consumable Product A</h3>
+                                        </div>
+                                        <div class="product-item-body">
+                                            <div class="product-rating">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                            <div class="product-price">
+                                                <p>₱500.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Slide End -->
 
-            scrollBtn.addEventListener("click", function () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                });
-            });
-        </script>
-    </body>
-</html>
+                                <!-- Product Slide Start -->
+                                <div class="swiper-slide">
+                                    <div class="product-item">
+                                        <div class="product-image">
+                                            <figure class="image-anime">
+                                                <img src="{{ asset('frontend/images/product-image-3.jpg') }}" alt="" />
+                                            </figure>
+                                        </div>
+                                        <div class="product-title">
+                                            <h3>Consumable Product B</h3>
+                                        </div>
+                                        <div class="product-item-body">
+                                            <div class="product-rating">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                            <div class="product-price">
+                                                <p>₱750.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Slide End -->
+                            </div>
+                            <div class="product-btn">
+                                <div class="product-button-prev"></div>
+                                <div class="product-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial Slider End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Product Section End -->
+@endsection

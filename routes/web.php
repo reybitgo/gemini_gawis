@@ -23,6 +23,20 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
+Route::get('/about', function () {
+    return view('frontend.about');
+})->name('frontend.about');
+
+Route::get('/contact', function () {
+    return view('frontend.contact');
+})->name('frontend.contact');
+
+Route::get('/opportunity', function () {
+    return view('frontend.opportunity');
+})->name('frontend.opportunity');
+
+
+
 Route::get('/test-login', function () {
     return view('test-login');
 });
