@@ -17,7 +17,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="images/favicon.png"
+            href="{{ asset('frontend/images/favicon.png') }}"
         />
         <!-- Google Fonts Css-->
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -27,11 +27,11 @@
             rel="stylesheet"
         />
         <!-- Bootstrap Css -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+        <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
         <!-- SlickNav Css -->
-        <link href="css/slicknav.min.css" rel="stylesheet" />
+        <link href="{{ asset('frontend/css/slicknav.min.css') }}" rel="stylesheet" />
         <!-- Swiper Css -->
-        <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
         <!-- Font Awesome Icon Css-->
         <link
             rel="stylesheet"
@@ -41,13 +41,13 @@
             referrerpolicy="no-referrer"
         />
         <!-- Animated Css -->
-        <link href="css/animate.css" rel="stylesheet" />
+        <link href="{{ asset('frontend/css/animate.css') }}" rel="stylesheet" />
         <!-- Magnific Popup Core Css File -->
-        <link rel="stylesheet" href="css/magnific-popup.css" />
+        <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}" />
         <!-- Mouse Cursor Css File -->
-        <link rel="stylesheet" href="css/mousecursor.css" />
+        <link rel="stylesheet" href="{{ asset('frontend/css/mousecursor.css') }}" />
         <!-- Main Custom Css -->
-        <link href="css/custom.css" rel="stylesheet" media="screen" />
+        <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet" media="screen" />
         <style>
             #scrollTopBtn {
                 position: fixed;
@@ -86,7 +86,7 @@
             <div class="loading-container">
                 <div class="loading"></div>
                 <div id="loading-icon">
-                    <img src="images/loader.png" height="50" alt="" />
+                    <img src="{{ asset('frontend/images/loader.png') }}" height="50" alt="" />
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     <div class="container">
                         <!-- Logo Start -->
                         <a class="navbar-brand" href="index.html">
-                            <img src="images/logo.png" height="46" alt="Logo" />
+                            <img src="{{ asset('frontend/images/logo.png') }}" height="46" alt="Logo" />
                         </a>
                         <!-- Logo End -->
 
@@ -226,7 +226,7 @@
                         <!-- Hero Image Start -->
                         <div class="hero-image">
                             <figure>
-                                <img src="images/hero-image.png" alt="" />
+                                <img src="{{ asset('frontend/images/hero-image.png') }}" alt="" />
                             </figure>
                         </div>
                         <!-- Hero Image End -->
@@ -242,46 +242,46 @@
             <div class="scrolling-ticker-box">
                 <div class="scrolling-content">
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />5-Level
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level
                         Commission Structure</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Unilevel
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel
                         Bonus System</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Real-Time
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time
                         Processing</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Integrated
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated
                         E-Wallet</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Premium
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium
                         Quality Products</span
                     >
                 </div>
 
                 <div class="scrolling-content">
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />5-Level
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />5-Level
                         Commission Structure</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Unilevel
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Unilevel
                         Bonus System</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Real-Time
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Real-Time
                         Processing</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Integrated
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Integrated
                         E-Wallet</span
                     >
                     <span
-                        ><img src="images/asterisk-icon.svg" alt="" />Premium
+                        ><img src="{{ asset('frontend/images/asterisk-icon.svg') }}" alt="" />Premium
                         Quality Products</span
                     >
                 </div>
@@ -297,7 +297,7 @@
                         <!-- About Images Start -->
                         <div class="about-images">
                             <figure>
-                                <img src="images/about-img.png" alt="" />
+                                <img src="{{ asset('frontend/images/about-img.png') }}" alt="" />
                             </figure>
                         </div>
                         <!-- About Images End -->
@@ -343,7 +343,7 @@
                                 <div class="about-body-item">
                                     <div class="icon-box">
                                         <img
-                                            src="images/icon-about-body.svg"
+                                            src="{{ asset('frontend/images/icon-about-body.svg') }}"
                                             alt=""
                                         />
                                     </div>
@@ -372,7 +372,7 @@
                                 <div class="about-contact-box">
                                     <div class="icon-box">
                                         <img
-                                            src="images/icon-phone.svg"
+    src="{{ asset('frontend/images/icon-phone.svg') }}"
                                             alt=""
                                         />
                                     </div>
@@ -441,7 +441,7 @@
                                             <div class="product-image">
                                                 <figure class="image-anime">
                                                     <img
-                                                        src="images/product-image-1.jpg"
+                                                        src="{{ asset('frontend/images/product-image-1.jpg') }}"
                                                         alt=""
                                                     />
                                                 </figure>
@@ -481,7 +481,7 @@
                                             <div class="product-image">
                                                 <figure class="image-anime">
                                                     <img
-                                                        src="images/product-image-2.jpg"
+                                                        src="{{ asset('frontend/images/product-image-2.jpg') }}"
                                                         alt=""
                                                     />
                                                 </figure>
@@ -521,7 +521,7 @@
                                             <div class="product-image">
                                                 <figure class="image-anime">
                                                     <img
-                                                        src="images/product-image-3.jpg"
+                                                        src="{{ asset('frontend/images/product-image-3.jpg') }}"
                                                         alt=""
                                                     />
                                                 </figure>
@@ -578,7 +578,7 @@
                         <div class="about-footer">
                             <!-- Footer Logo Start -->
                             <div class="footer-logo">
-                                <img src="images/logo.png" alt="" />
+                                <img src="{{ asset('frontend/images/logo.png') }}" alt="" />
                             </div>
                             <!-- Footer Logo End -->
 
@@ -631,7 +631,7 @@
                             <!-- Footer Contact Item Start -->
                             <div class="footer-contact-item">
                                 <div class="icon-box">
-                                    <img src="images/icon-phone.svg" alt="" />
+                                    <img src="{{ asset('frontend/images/icon-phone.svg') }}" alt="" />
                                 </div>
                                 <div class="footer-contact-item-content">
                                     <p>Call Us</p>
@@ -647,7 +647,7 @@
                             <!-- Footer Contact Item Start -->
                             <div class="footer-contact-item">
                                 <div class="icon-box">
-                                    <img src="images/icon-mail.svg" alt="" />
+                                    <img src="{{ asset('frontend/images/icon-mail.svg') }}" alt="" />
                                 </div>
                                 <div class="footer-contact-item-content">
                                     <p>E-mail</p>
@@ -676,36 +676,36 @@
         <!-- Main Footer End -->
 
         <!-- Jquery Library File -->
-        <script src="js/jquery-3.7.1.min.js"></script>
+        <script src="{{ asset('frontend/js/jquery-3.7.1.min.js') }}"></script>
         <!-- Bootstrap js file -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
         <!-- Validator js file -->
-        <script src="js/validator.min.js"></script>
+        <script src="{{ asset('frontend/js/validator.min.js') }}"></script>
         <!-- SlickNav js file -->
-        <script src="js/jquery.slicknav.js"></script>
+        <script src="{{ asset('frontend/js/jquery.slicknav.js') }}"></script>
         <!-- Swiper js file -->
-        <script src="js/swiper-bundle.min.js"></script>
+        <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
         <!-- Counter js file -->
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.counterup.min.js"></script>
+        <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
         <!-- Magnific js file -->
-        <script src="js/jquery.magnific-popup.min..js"></script>
+        <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
         <!-- SmoothScroll -->
-        <script src="js/SmoothScroll.js"></script>
+        <script src="{{ asset('frontend/js/SmoothScroll.js') }}"></script>
         <!-- Parallax js -->
-        <script src="js/parallaxie.js"></script>
+        <script src="{{ asset('frontend/js/parallaxie.js') }}"></script>
         <!-- MagicCursor js file -->
-        <script src="js/gsap.min.js"></script>
-        <script src="js/magiccursor.js"></script>
+        <script src="{{ asset('frontend/js/gsap.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/magiccursor.js') }}"></script>
         <!-- Text Effect js file -->
-        <script src="js/SplitText.js"></script>
-        <script src="js/ScrollTrigger.min.js"></script>
+        <script src="{{ asset('frontend/js/SplitText.js') }}"></script>
+        <script src="{{ asset('frontend/js/ScrollTrigger.min.js') }}"></script>
         <!-- YTPlayer js File -->
-        <script src="js/jquery.mb.YTPlayer.min.js"></script>
+        <script src="{{ asset('frontend/js/jquery.mb.YTPlayer.min.js') }}"></script>
         <!-- Wow js file -->
-        <script src="js/wow.min.js"></script>
+        <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
         <!-- Main Custom js file -->
-        <script src="js/function.js"></script>
+        <script src="{{ asset('frontend/js/function.js') }}"></script>
 
         <!-- Scroll to Top Button -->
         <button id="scrollTopBtn" title="Go to top">
