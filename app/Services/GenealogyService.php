@@ -21,7 +21,13 @@ class GenealogyService
         $downlineUsers = $this->fetchDownlineHierarchy($user->id, $maxLevel);
 
         if ($downlineUsers->isEmpty()) {
-            return [];
+            return [
+                'tree' => [],
+                'stats' => [
+                    'total_downlines' => 0,
+                    'active_downlines' => 0,
+                ]
+            ];
         }
 
         // Step 2: Fetch the earnings data for all downlines in a single query
@@ -33,8 +39,16 @@ class GenealogyService
             $downline->earnings = $earningsData[$downline->id] ?? 0;
         });
 
-        // Step 4: Build the nested tree structure
-        return $this->buildTree($downlineUsers);
+        // Step 4: Calculate stats
+        $stats = [
+            'total_downlines' => $downlineUsers->count(),
+            'active_downlines' => $downlineUsers->where('status', 'active')->count(),
+        ];
+
+        // Step 5: Build the nested tree structure
+        $tree = $this->buildTree($downlineUsers);
+
+        return ['tree' => $tree, 'stats' => $stats];
     }
 
     private function fetchDownlineHierarchy(int $userId, int $maxLevel): \Illuminate\Support\Collection

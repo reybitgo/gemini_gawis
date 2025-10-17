@@ -157,7 +157,41 @@
 @once
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Use event delegation for dynamically loaded content if necessary, but for now this is fine.
+    // --- Search Functionality ---
+    const searchInput = document.getElementById('genealogy-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const allNodes = document.querySelectorAll('.genealogy-node');
+
+            allNodes.forEach(node => {
+                const name = node.querySelector('.node-name').textContent.toLowerCase();
+                const username = node.querySelector('.node-username').textContent.toLowerCase();
+                const isMatch = name.includes(searchTerm) || username.includes(searchTerm);
+
+                if (isMatch) {
+                    // Show the node and all its parents
+                    node.style.display = 'block';
+                    let parent = node.parentElement.closest('.genealogy-node');
+                    while(parent) {
+                        parent.style.display = 'block';
+                        // Also expand the parent to make the child visible
+                        const parentToggle = parent.querySelector('.node-toggle');
+                        const childrenList = parent.querySelector('.genealogy-level');
+                        if(parentToggle && childrenList && parentToggle.getAttribute('aria-expanded') === 'false') {
+                            parentToggle.click();
+                        }
+                        parent = parent.parentElement.closest('.genealogy-node');
+                    }
+                } else {
+                    // Hide the node if it doesn't match
+                    node.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // --- Toggle Functionality ---
     document.body.addEventListener('click', function(e) {
         const toggle = e.target.closest('.node-toggle');
         if (toggle) {

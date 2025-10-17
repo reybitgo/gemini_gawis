@@ -19,16 +19,22 @@ class GenealogyController extends Controller
     public function showUnilevel()
     {
         $user = Auth::user();
-        $tree = $this->genealogyService->getGenealogyTree($user, 'unilevel_bonus');
+        $data = $this->genealogyService->getGenealogyTree($user, 'unilevel_bonus');
 
-        return view('member.genealogy.unilevel', ['tree' => $tree]);
+        return view('member.genealogy.unilevel', [
+            'tree' => $data['tree'],
+            'stats' => $data['stats'],
+        ]);
     }
 
     public function showMlm()
     {
         $user = Auth::user();
-        $tree = $this->genealogyService->getGenealogyTree($user, 'mlm_commission');
+        $data = $this->genealogyService->getGenealogyTree($user, 'mlm_commission');
 
-        return view('member.genealogy.mlm', ['tree' => $tree]);
+        return view('member.genealogy.mlm', [
+            'tree' => $data['tree'],
+            'stats' => $data['stats'],
+        ]);
     }
 }
