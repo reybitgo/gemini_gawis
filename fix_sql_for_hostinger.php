@@ -5,7 +5,7 @@
  * Removes DEFINER clauses that cause permission errors
  */
 
-$inputFile = __DIR__ . '/public/gemini_gawis_db (2).sql';
+$inputFile = __DIR__ . '/public/gemini_gawis_db (3).sql';
 $outputFile = __DIR__ . '/public/deploy_coreui_laravel_db_hostinger.sql';
 
 echo "Reading SQL file...\n";

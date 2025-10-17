@@ -1,11 +1,6 @@
 RewriteEngine On
 
-# Allow index.html to be served for root requests
-DirectoryIndex index.html index.php
-
-# Only redirect to public/ for specific Laravel routes (not root)
-RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !^/index\.html$
-RewriteCond %{REQUEST_URI} !^/test\.php$
+# Redirect all requests to public/ folder
 RewriteCond %{REQUEST_URI} !^/public/
+RewriteCond %{REQUEST_URI} !^/test\.php$
 RewriteRule ^(.*)$ public/$1 [L]

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 15, 2025 at 04:28 AM
+-- Generation Time: Oct 17, 2025 at 12:44 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -103,8 +103,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('gemini-gawis-cache-5c785c036466adea360111aa28563bfd556b5fba', 'i:2;', 1760502443),
-('gemini-gawis-cache-5c785c036466adea360111aa28563bfd556b5fba:timer', 'i:1760502443;', 1760502443);
+('gemini-gawis-cache-5c785c036466adea360111aa28563bfd556b5fba', 'i:1;', 1760661766),
+('gemini-gawis-cache-5c785c036466adea360111aa28563bfd556b5fba:timer', 'i:1760661766;', 1760661766);
 
 -- --------------------------------------------------------
 
@@ -283,11 +283,11 @@ CREATE TABLE `mlm_settings` (
 --
 
 INSERT INTO `mlm_settings` (`id`, `package_id`, `level`, `commission_amount`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 200.00, 1, '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(2, 1, 2, 50.00, 1, '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(3, 1, 3, 50.00, 1, '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(4, 1, 4, 50.00, 1, '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(5, 1, 5, 50.00, 1, '2025-10-15 04:19:58', '2025-10-15 04:19:58');
+(1, 1, 1, 200.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(2, 1, 2, 50.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(3, 1, 3, 50.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(4, 1, 4, 50.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(5, 1, 5, 50.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45');
 
 -- --------------------------------------------------------
 
@@ -449,7 +449,7 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`id`, `name`, `slug`, `price`, `points_awarded`, `quantity_available`, `short_description`, `long_description`, `image_path`, `is_active`, `sort_order`, `meta_data`, `is_mlm_package`, `max_mlm_levels`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Starter Package', 'starter-package', 1000.00, 100, 9999, 'MLM Starter Package with 5-level commission structure', 'Join our Multi-Level Marketing program with the Starter Package. Earn commissions from your network across 5 levels: ₱200 from direct referrals (Level 1) and ₱50 from each of 4 indirect levels (Levels 2-5). Build your team and maximize your earnings potential!', NULL, 1, 1, '{\"features\": [\"MLM Business Opportunity\", \"Share Referral Links\", \"5-Level Commission Structure\", \"Withdrawable MLM Earnings\", \"Network Visualization\"], \"profit_margin\": \"60%\", \"company_profit\": 600, \"total_commission\": 400, \"commission_breakdown\": {\"level_1\": 200, \"level_2\": 50, \"level_3\": 50, \"level_4\": 50, \"level_5\": 50}}', 1, 5, '2025-10-15 04:19:58', '2025-10-15 04:19:58', NULL);
+(1, 'Starter Package', 'starter-package', 1000.00, 100, 9999, 'MLM Starter Package with 5-level commission structure', 'Join our Multi-Level Marketing program with the Starter Package. Earn commissions from your network across 5 levels: ₱200 from direct referrals (Level 1) and ₱50 from each of 4 indirect levels (Levels 2-5). Build your team and maximize your earnings potential!', NULL, 1, 1, '{\"features\": [\"MLM Business Opportunity\", \"Share Referral Links\", \"5-Level Commission Structure\", \"Withdrawable MLM Earnings\", \"Network Visualization\"], \"profit_margin\": \"60%\", \"company_profit\": 600, \"total_commission\": 400, \"commission_breakdown\": {\"level_1\": 200, \"level_2\": 50, \"level_3\": 50, \"level_4\": 50, \"level_5\": 50}}', 1, 5, '2025-10-17 00:41:45', '2025-10-17 00:41:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -501,14 +501,14 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'wallet_management', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(2, 'transaction_approval', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(3, 'system_settings', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(4, 'deposit_funds', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(5, 'transfer_funds', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(6, 'withdraw_funds', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(7, 'view_transactions', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(8, 'profile_update', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55');
+(1, 'wallet_management', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(2, 'transaction_approval', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(3, 'system_settings', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(4, 'deposit_funds', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(5, 'transfer_funds', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(6, 'withdraw_funds', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(7, 'view_transactions', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(8, 'profile_update', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44');
 
 -- --------------------------------------------------------
 
@@ -543,8 +543,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `slug`, `price`, `points_awarded`, `quantity_available`, `short_description`, `long_description`, `image_path`, `is_active`, `sort_order`, `meta_data`, `total_unilevel_bonus`, `sku`, `category`, `weight_grams`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Collagen Beauty Drink', 'collagen-beauty-drink', 1500.00, 25, 100, 'Marine collagen peptides for youthful skin and strong nails', 'Transform your beauty routine with our Collagen Beauty Drink. Made from marine collagen peptides with added vitamins C and E, this delicious drink supports skin elasticity, reduces fine lines, and strengthens hair and nails.', NULL, 1, 0, NULL, 130.00, 'PROD-4SQYJZMT', 'Beauty', 300, '2025-10-15 04:19:59', '2025-10-15 04:19:59', NULL),
-(2, 'Immune Booster Capsules', 'immune-booster-capsules', 1200.00, 20, 50, 'A blend of Vitamin C, Zinc, and Elderberry to support your immune system.', 'Stay protected year-round with our Immune Booster Capsules. Each capsule is packed with a powerful combination of Vitamin C, Zinc, and Elderberry extract to help strengthen your body\'s natural defenses.', NULL, 1, 0, NULL, 100.00, 'PROD-JU51V8AX', 'Health & Wellness', 150, '2025-10-15 04:19:59', '2025-10-15 04:19:59', NULL);
+(1, 'Collagen Beauty Drink', 'collagen-beauty-drink', 1500.00, 25, 100, 'Marine collagen peptides for youthful skin and strong nails', 'Transform your beauty routine with our Collagen Beauty Drink. Made from marine collagen peptides with added vitamins C and E, this delicious drink supports skin elasticity, reduces fine lines, and strengthens hair and nails.', NULL, 1, 0, NULL, 130.00, 'PROD-FTZSHLED', 'Beauty', 300, '2025-10-17 00:41:45', '2025-10-17 00:41:45', NULL),
+(2, 'Immune Booster Capsules', 'immune-booster-capsules', 1200.00, 20, 50, 'A blend of Vitamin C, Zinc, and Elderberry to support your immune system.', 'Stay protected year-round with our Immune Booster Capsules. Each capsule is packed with a powerful combination of Vitamin C, Zinc, and Elderberry extract to help strengthen your body\'s natural defenses.', NULL, 1, 0, NULL, 100.00, 'PROD-HIDUOBUC', 'Health & Wellness', 150, '2025-10-17 00:41:45', '2025-10-17 00:41:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -605,8 +605,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55'),
-(2, 'member', 'web', '2025-10-15 04:19:55', '2025-10-15 04:19:55');
+(1, 'admin', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44'),
+(2, 'member', 'web', '2025-10-17 00:41:44', '2025-10-17 00:41:44');
 
 -- --------------------------------------------------------
 
@@ -658,7 +658,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BPH2zcZbo0hSphIpYf7UNfCPNT7VVLmzcZmf5ED2', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'ZXlKcGRpSTZJbEpIY1RoNFoyMVpMMEowZFdKamNUQk5hMlJUUzFFOVBTSXNJblpoYkhWbElqb2lUMVVyYkc5V1RHeENOVmx4VGxaMGJ6Wm5WRW93ZG5aMFFqQkJWMG8yYlRSMFpsVXhTbEpNY3pseGVuTTFOa3d3Tm5FeFpGbExSMHMxTjJKT1pVSXdVMUpQUnpKWldFeFpiMFExUkhndmFFVTRaMHhCV21sbU5pOUVRVU5qTWt3NVdDOVZTazFJTkVKNmVIUmhhekIzT0ZjelRYaHplWE51V0hGNU1uTnhiREZRVTJGaVlXUlNNU3RGTjA5T1JsWlZOamNyYzNRclQxTmFXbTVHZEV4RFozZGpkalZTTkVZdk1FVnZVWGxDWldKVVNFbGtiV0puVjJwaGFtNUJSRFpHVmtFMUwyTlBTV2MzTm5oNWFDdE1aVUV3Ym5jMVoweGhhbTVpUTI0d01VRmhlSFZhVkhwTFdWWlpka1poUmpoaFMyc3ZaRmhYWWpZNWFXVnpUV04xZEU1a1RTdE5XRlJWUzFKa00ybHlVVEpKVGxRNWMxWXJXbEJEUlZsV09VRmhORmt3ZEhaRFMzZHdTRTloTlV0bGFVWkNTWFJsWjFaa2FtTnRPWFV4YjNvaUxDSnRZV01pT2lKbE16ZGhZbVpqTTJSaU1qaGhZakUxWTJVelpqa3pNakpoTjJVellqazRZemRoTWpjeU5ETmlNR05pWldNd05HRmxNR05qWmpjME5HSTNZV1l3TTJVeklpd2lkR0ZuSWpvaUluMD0=', 1760502391);
+('3M4Q0NwmYeeFn6ZkfQun51tJDTIOSp2zYPoz3DpT', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'ZXlKcGRpSTZJaTh2VjFSRGRHZHRhVGRHVFdaeE4yTnRWWGc1UkdjOVBTSXNJblpoYkhWbElqb2lVRzltYWxvM1RVRmtSMDUzZUhad2VVSmFjV3N5VW13clozaEtkbXRWWmtSYVVWTktTMEpaTXpjMFJIWmlTV2hCYmxOcWFqWXlPVEpxTVc1RE9ESnpVak5qVFZneFJreFdjR0ZKVmxaR1VYWlFLeXRVY1d4blJsTkxhR1l3WkRFMmQzaExNMGRqU0dKNmRrUkZia3hTY1hVM1MwMHdiMnRuU0hoQ1NuY3ZNMnBvUnpkdFVYTndVVUpHTDNFeFdGbzJjMmhqT0hoak1qWnZia1ZVT0dkRllYRlJTMjFCVkdncmRXUmFRbUl3WVdSV1NIUTBPV013YWtZdmJsYzBlVFE0ZEdWRFEwSkdRWGt3VTFkMU5XcGpNV1JEYjBabFdIRnZlVGxYVkZoUEt6QnVjSFJQSzNkWlZITTBPWEJ0TjBWT1lXOXZhbnBIVldGeVMyVkNTV3RhVkhwbFZ6Vk9jWFZNU0hNek16aFlaVXhLVlZVclozQXlXRlJqTmswMU5WWmtkM0ZzWjNOSWNGZHdOVXBhU0dsWlpDc3lORVV5UkcxMVpUbGFSRWRMWmtjaUxDSnRZV01pT2lJNVkyWm1NVFptT1dJek1HWXdaalZqT1RNeVl6bG1aV0ZrWXpkbFlUYzNaVGswT0dVNE5HTXhPVEk1TkRrNVpXTmpNemMyT1dGaU1UVTVaVFpsWm1ZMElpd2lkR0ZuSWpvaUluMD0=', 1760661707);
 
 -- --------------------------------------------------------
 
@@ -681,14 +681,14 @@ CREATE TABLE `system_settings` (
 --
 
 INSERT INTO `system_settings` (`id`, `key`, `value`, `type`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'app_name', 'Gawis iHerbal', 'string', 'Application name', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(2, 'app_version', '1.0.0', 'string', 'Application version', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(3, 'email_verification_enabled', '1', 'boolean', 'Enable email verification', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(4, 'maintenance_mode', '0', 'boolean', 'Maintenance mode status', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(5, 'tax_rate', '0', 'decimal', 'E-commerce tax rate (0.0 to 1.0)', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(6, 'email_verification_required', '1', 'boolean', 'Require email verification after registration', '2025-10-15 04:19:58', '2025-10-15 04:19:58'),
-(7, 'reset_count', '2', 'integer', 'Number of times database has been reset', '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(8, 'last_reset_date', '2025-10-15T04:19:59.277246Z', 'string', 'Last database reset timestamp', '2025-10-15 04:19:59', '2025-10-15 04:19:59');
+(1, 'app_name', 'Gawis iHerbal', 'string', 'Application name', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(2, 'app_version', '1.0.0', 'string', 'Application version', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(3, 'email_verification_enabled', '1', 'boolean', 'Enable email verification', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(4, 'maintenance_mode', '0', 'boolean', 'Maintenance mode status', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(5, 'tax_rate', '0', 'decimal', 'E-commerce tax rate (0.0 to 1.0)', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(6, 'email_verification_required', '1', 'boolean', 'Require email verification after registration', '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(7, 'reset_count', '2', 'integer', 'Number of times database has been reset', '2025-10-17 00:41:45', '2025-10-17 00:41:46'),
+(8, 'last_reset_date', '2025-10-17T00:41:46.047439Z', 'string', 'Last database reset timestamp', '2025-10-17 00:41:46', '2025-10-17 00:41:46');
 
 -- --------------------------------------------------------
 
@@ -737,16 +737,16 @@ CREATE TABLE `unilevel_settings` (
 --
 
 INSERT INTO `unilevel_settings` (`id`, `product_id`, `level`, `bonus_amount`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 50.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(2, 1, 2, 30.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(3, 1, 3, 20.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(4, 1, 4, 15.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(5, 1, 5, 15.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(6, 2, 1, 40.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(7, 2, 2, 25.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(8, 2, 3, 15.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(9, 2, 4, 10.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59'),
-(10, 2, 5, 10.00, 1, '2025-10-15 04:19:59', '2025-10-15 04:19:59');
+(1, 1, 1, 50.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(2, 1, 2, 30.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(3, 1, 3, 20.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(4, 1, 4, 15.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(5, 1, 5, 15.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(6, 2, 1, 40.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(7, 2, 2, 25.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(8, 2, 3, 15.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(9, 2, 4, 10.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(10, 2, 5, 10.00, 1, '2025-10-17 00:41:45', '2025-10-17 00:41:45');
 
 -- --------------------------------------------------------
 
@@ -794,8 +794,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `sponsor_id`, `referral_code`, `network_status`, `network_activated_at`, `last_product_purchase_at`, `username`, `fullname`, `email`, `phone`, `address`, `address_2`, `city`, `state`, `zip`, `delivery_instructions`, `delivery_time_preference`, `email_verified_at`, `suspended_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `created_at`, `updated_at`, `payment_preference`, `gcash_number`, `maya_number`, `pickup_location`, `other_payment_method`, `other_payment_details`) VALUES
-(1, NULL, 'REF7TKOCFBH', 'inactive', NULL, NULL, 'admin', 'System Administrator', 'admin@gawisherbal.com', '+63 (947) 367-7436', '123 Herbal Street', NULL, 'Wellness City', 'HC', '12345', NULL, 'anytime', '2025-10-15 04:19:56', NULL, '$2y$12$nfuIYLgZAHCeY/CaMkOcWelX973trFeh5MLWZqYB2YY5.Buc8rcIK', NULL, NULL, NULL, NULL, '2025-10-15 04:19:56', '2025-10-15 04:19:56', NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 'REFRFHTETDE', 'inactive', NULL, NULL, 'member', 'John Michael Santos', 'member@gawisherbal.com', '+63 (912) 456-7890', '456 Wellness Avenue', 'Unit 202', 'Health City', 'Metro Manila', '54321', 'Ring doorbell twice. Gate code: 1234', 'morning', '2025-10-15 04:19:58', NULL, '$2y$12$ZD0iyzJ/s2yWoQibXNP3xO4jNK6aOmbvpmewDmjaGYBJR8pXw..ue', NULL, NULL, NULL, NULL, '2025-10-15 04:19:58', '2025-10-15 04:19:58', NULL, NULL, NULL, NULL, NULL, NULL);
+(1, NULL, 'REFEOYTFROW', 'inactive', NULL, NULL, 'admin', 'System Administrator', 'admin@gawisherbal.com', '+63 (947) 367-7436', '123 Herbal Street', NULL, 'Wellness City', 'HC', '12345', NULL, 'anytime', '2025-10-17 00:41:45', NULL, '$2y$12$FYvCmdc8R9WETGhLPDI4ieHTSIgDZJmPQxUJrgfglVAAMpSHWG4xy', NULL, NULL, NULL, NULL, '2025-10-17 00:41:45', '2025-10-17 00:41:45', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 'REFS1SOFMAH', 'inactive', NULL, NULL, 'member', 'John Michael Santos', 'member@gawisherbal.com', '+63 (912) 456-7890', '456 Wellness Avenue', 'Unit 202', 'Health City', 'Metro Manila', '54321', 'Ring doorbell twice. Gate code: 1234', 'morning', '2025-10-17 00:41:45', NULL, '$2y$12$vEywmRYHydpiYUkjoN5k2uscVdmuLFeLQvHIVK2.O77DjX.BGcqzi', NULL, NULL, NULL, NULL, '2025-10-17 00:41:45', '2025-10-17 00:41:45', NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Triggers `users`
@@ -851,8 +851,8 @@ CREATE TABLE `wallets` (
 --
 
 INSERT INTO `wallets` (`id`, `user_id`, `mlm_balance`, `unilevel_balance`, `withdrawable_balance`, `purchase_balance`, `is_active`, `last_transaction_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 0.00, 0.00, 0.00, 1000.00, 1, NULL, '2025-10-15 04:19:56', '2025-10-15 04:19:58'),
-(2, 2, 0.00, 0.00, 0.00, 1000.00, 1, NULL, '2025-10-15 04:19:58', '2025-10-15 04:19:58');
+(1, 1, 0.00, 0.00, 0.00, 1000.00, 1, NULL, '2025-10-17 00:41:45', '2025-10-17 00:41:45'),
+(2, 2, 0.00, 0.00, 0.00, 1000.00, 1, NULL, '2025-10-17 00:41:45', '2025-10-17 00:41:45');
 
 --
 -- Indexes for dumped tables
