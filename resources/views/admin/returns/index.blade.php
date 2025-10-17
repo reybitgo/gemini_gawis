@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Return Requests Management')
+@section('page-title', 'Return Requests')
 
 @section('content')
 <div class="container-fluid">

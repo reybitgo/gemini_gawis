@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Unilevel Genealogy')
+@section('page-title', 'Unilevel Genealogy')
 
 @section('content')
     <div class="container-fluid">

@@ -44,7 +44,12 @@ class AdminProductController extends Controller
             ->distinct()
             ->pluck('category');
 
-        return view('admin.products.index', compact('products', 'perPage', 'categories'));
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Product Management'],
+        ];
+
+        return view('admin.products.index', compact('products', 'perPage', 'categories', 'breadcrumbs'));
     }
 
     public function create()

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Order Management')
+@section('page-title', 'Order Management')
 
 @push('styles')
 <style>

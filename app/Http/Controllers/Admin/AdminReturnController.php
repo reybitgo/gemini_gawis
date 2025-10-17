@@ -41,7 +41,12 @@ class AdminReturnController extends Controller
         // Count pending returns for sidebar badge
         $pendingCount = ReturnRequest::where('status', ReturnRequest::STATUS_PENDING)->count();
 
-        return view('admin.returns.index', compact('returnRequests', 'pendingCount', 'perPage'));
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Return Requests'],
+        ];
+
+        return view('admin.returns.index', compact('returnRequests', 'pendingCount', 'perPage', 'breadcrumbs'));
     }
 
     /**

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'MLM Genealogy')
+@section('page-title', 'MLM Genealogy')
 
 @section('content')
     <div class="container-fluid">

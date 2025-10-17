@@ -52,6 +52,10 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
+        $breadcrumbs = [
+            ['title' => 'Admin Dashboard'],
+        ];
+
         return view('admin.dashboard', compact(
             'userCount',
             'adminCount',
@@ -66,7 +70,8 @@ class AdminController extends Controller
             'totalWithdrawals',
             'monthlyVolume',
             'recentTransactions',
-            'recentUsers'
+            'recentUsers',
+            'breadcrumbs'
         ));
     }
 
@@ -119,6 +124,11 @@ class AdminController extends Controller
         // Get paginated transactions
         $allTransactions = $transactionsQuery->latest()->paginate($perPage)->appends($request->query());
 
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Wallet Management'],
+        ];
+
         return view('admin.wallet-management', compact(
             'wallets',
             'totalBalance',
@@ -133,7 +143,8 @@ class AdminController extends Controller
             'allTransactions',
             'statusFilter',
             'typeFilter',
-            'perPage'
+            'perPage',
+            'breadcrumbs'
         ));
     }
 
@@ -148,7 +159,12 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate($perPage)->appends($request->query());
 
-        return view('admin.transaction-approval', compact('pendingTransactions', 'perPage'));
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Transaction Approval'],
+        ];
+
+        return view('admin.transaction-approval', compact('pendingTransactions', 'perPage', 'breadcrumbs'));
     }
 
     public function systemSettings()
@@ -259,7 +275,12 @@ class AdminController extends Controller
         $perPage = $this->getPerPage($request, 15);
         $users = User::with(['roles', 'wallet'])->paginate($perPage)->appends($request->query());
 
-        return view('admin.users', compact('users', 'perPage'));
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'User Management'],
+        ];
+
+        return view('admin.users', compact('users', 'perPage', 'breadcrumbs'));
     }
 
     public function editUser(User $user)

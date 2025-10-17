@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Wallet Management')
+@section('page-title', 'Wallet Management')
 
 @section('content')
 <!-- Page Header -->

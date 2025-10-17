@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Transaction Approval')
+@section('page-title', 'Transaction Approval')
 
 @section('content')
 <!-- Success/Error Messages -->

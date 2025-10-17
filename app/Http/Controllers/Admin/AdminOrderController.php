@@ -99,12 +99,18 @@ class AdminOrderController extends Controller
             return !in_array($status, $adminBlockedStatuses);
         }, ARRAY_FILTER_USE_KEY);
 
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Order Management'],
+        ];
+
         return view('admin.orders.index', compact(
             'orders',
             'statusStats',
             'ordersRequiringAttention',
             'adminAllowedStatusLabels',
-            'perPage'
+            'perPage',
+            'breadcrumbs'
         ));
     }
 

@@ -21,9 +21,15 @@ class GenealogyController extends Controller
         $user = Auth::user();
         $data = $this->genealogyService->getGenealogyTree($user, 'unilevel_bonus');
 
+        $breadcrumbs = [
+            ['title' => 'Genealogy'],
+            ['title' => 'Unilevel'],
+        ];
+
         return view('member.genealogy.unilevel', [
             'tree' => $data['tree'],
             'stats' => $data['stats'],
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -32,9 +38,15 @@ class GenealogyController extends Controller
         $user = Auth::user();
         $data = $this->genealogyService->getGenealogyTree($user, 'mlm_commission');
 
+        $breadcrumbs = [
+            ['title' => 'Genealogy'],
+            ['title' => 'MLM'],
+        ];
+
         return view('member.genealogy.mlm', [
             'tree' => $data['tree'],
             'stats' => $data['stats'],
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 }

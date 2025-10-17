@@ -21,7 +21,12 @@ class AdminPackageController extends Controller
             ->orderBy('name')
             ->paginate($perPage)->appends($request->query());
 
-        return view('admin.packages.index', compact('packages', 'perPage'));
+        $breadcrumbs = [
+            ['title' => 'Management'],
+            ['title' => 'Package Management'],
+        ];
+
+        return view('admin.packages.index', compact('packages', 'perPage', 'breadcrumbs'));
     }
 
     public function create()

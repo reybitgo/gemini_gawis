@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Package Management')
+@section('page-title', 'Package Management')
 
 @section('content')
 <div class="container-fluid">
