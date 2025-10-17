@@ -209,6 +209,32 @@
 
         <!-- Member Actions Section -->
         <li class="nav-title">Member Actions</li>
+        <li class="nav-group">
+            <a class="nav-link nav-group-toggle{{ Request::routeIs('member.unilevel.genealogy') || Request::routeIs('member.mlm.genealogy') ? ' active' : '' }}" href="#">
+                <svg class="nav-icon">
+                    <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-sitemap') }}"></use>
+                </svg>
+                <span>Genealogy</span>
+            </a>
+            <ul class="nav-group-items compact">
+                <li class="nav-item">
+                    <a class="nav-link{{ Request::routeIs('member.mlm.genealogy') ? ' active' : '' }}" href="{{ route('member.mlm.genealogy') }}">
+                        <span class="nav-icon">
+                            <span class="nav-icon-bullet"></span>
+                        </span>
+                        MLM
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link{{ Request::routeIs('member.unilevel.genealogy') ? ' active' : '' }}" href="{{ route('member.unilevel.genealogy') }}">
+                        <span class="nav-icon">
+                            <span class="nav-icon-bullet"></span>
+                        </span>
+                        Unilevel
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="nav-item">
             <a class="nav-link{{ Request::routeIs('member.register.*') ? ' active' : '' }}" href="{{ route('member.register.show') }}">
                 <svg class="nav-icon">

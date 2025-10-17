@@ -21,7 +21,14 @@
             <div class="node-status status-{{ $member->status }}">{{ ucfirst($member->status) }}</div>
         </div>
         @if(!empty($member->children))
-            <button class="node-toggle" aria-expanded="false">+</button>
+            <span class="node-toggle" role="button" tabindex="0" aria-expanded="false">
+                <svg class="icon icon-sm icon-zoom-in">
+                    <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-zoom-in') }}"></use>
+                </svg>
+                <svg class="icon icon-sm icon-zoom-out" style="display: none;">
+                    <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-zoom-out') }}"></use>
+                </svg>
+            </span>
         @endif
     </div>
 
@@ -57,6 +64,7 @@
         border-radius: 8px;
         padding: 10px 15px;
         flex-wrap: wrap; /* Allow wrapping on small screens */
+        position: relative; /* For mobile toggle positioning */
     }
     .node-main {
         display: flex;
@@ -113,15 +121,12 @@
     .status-suspended { background-color: #dc3545; }
 
     .node-toggle {
-        background: #e9ecef;
-        border: 1px solid #ddd;
-        border-radius: 50%;
-        width: 24px;
-        height: 24px;
-        line-height: 22px;
-        text-align: center;
         cursor: pointer;
         margin-left: 15px;
+        color: #6c757d;
+    }
+    .node-toggle:hover {
+        color: #3c4b64;
     }
 
     /* Responsive Styles */
@@ -148,3 +153,36 @@
     }
 </style>
 @endonce
+
+@once
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Use event delegation for dynamically loaded content if necessary, but for now this is fine.
+    document.body.addEventListener('click', function(e) {
+        const toggle = e.target.closest('.node-toggle');
+        if (toggle) {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            const childrenList = toggle.closest('.genealogy-node').querySelector('.genealogy-level');
+            const zoomInIcon = toggle.querySelector('.icon-zoom-in');
+            const zoomOutIcon = toggle.querySelector('.icon-zoom-out');
+
+            if (childrenList) {
+                toggle.setAttribute('aria-expanded', !isExpanded);
+                childrenList.style.display = isExpanded ? 'none' : 'block';
+                
+                if (zoomInIcon && zoomOutIcon) {
+                    if (isExpanded) {
+                        zoomInIcon.style.display = 'inline';
+                        zoomOutIcon.style.display = 'none';
+                    } else {
+                        zoomInIcon.style.display = 'none';
+                        zoomOutIcon.style.display = 'inline';
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+@endonce
+
