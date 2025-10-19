@@ -18,11 +18,10 @@ use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DatabaseResetController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/about', function () {
     return view('frontend.about');

@@ -45,7 +45,7 @@
                             <div class="contact-info-content">
                                 <p>Contact Us</p>
                                 <h3>
-                                    <a href="tel:+91123456987">+91 123 456 987</a>
+                                    <a href="tel:+639876543210"><small>+63 987 654 3210</small></a>
                                 </h3>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <div class="contact-info-content">
                                 <p>Email address</p>
                                 <h3>
-                                    <a href="mailto:info@domainname.com">info@domainname.com</a>
+                                    <a href="mailto:support@gawisherbal.com"><small>support@gawisherbal.com</small></a>
                                 </h3>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="contact-info-content">
                                 <p>location</p>
-                                <h3>123 High Stret, 1AA, UK</h3>
+                                <h3><small>Baguio City, Philippines</small></h3>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
@@ -151,7 +151,7 @@
                 <div class="col-lg-12">
                     <!-- Google Map IFrame Start -->
                     <div class="google-map-iframe">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96737.10562045308!2d-74.08535042841811!3d40.739265258395164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703158537552!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61698.77785073634!2d120.54004637832029!3d16.41158469999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3391a167619959d9%3A0x430b49bcc8d8a30!2sBaguio%2C%20Benguet%2C%20Philippines!5e0!3m2!1sen!2sph!4v1729170000000!5m2!1sen!2sph" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <!-- Google Map IFrame End -->
                 </div>
