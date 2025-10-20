@@ -35,9 +35,7 @@ Route::get('/opportunity', function () {
     return view('frontend.opportunity');
 })->name('frontend.opportunity');
 
-Route::get('/our-products', function () {
-    return view('frontend.products');
-})->name('frontend.our-products');
+Route::get('/our-products', [FrontendController::class, 'products'])->name('frontend.our-products');
 
 
 
