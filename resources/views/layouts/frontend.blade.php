@@ -69,7 +69,11 @@
                 align-items: center;
                 justify-content: center;
                 transition: all 0.3s ease;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                box-shadow: inset 0 0 0 1px #669933, 0 0 0 1px #669933, 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            #scrollTopBtn i {
+                text-shadow: -1px -1px 0 #669933, 1px -1px 0 #669933, -1px 1px 0 #669933, 1px 1px 0 #669933;
             }
 
             #scrollTopBtn:hover {
@@ -78,6 +82,10 @@
                 color: #669933;
                 transform: translateY(-5px);
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            }
+
+            #scrollTopBtn:hover i {
+                text-shadow: none;
             }
         </style>
     </head>

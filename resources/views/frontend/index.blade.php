@@ -192,7 +192,7 @@
                                 @endforeach
                             </ul>
                             @endif
-                            <a href="#" class="btn btn-outline-gawis w-100 mt-3 view-details-btn" 
+                            <a href="#" class="btn btn-outline-gawis w-100 mt-3 view-details-btn-package" 
                                 data-package-name="{{ $package->name }}" 
                                 data-mlm-settings='{{ json_encode($package->mlmSettings) }}'>View Details</a>
                         </div>
@@ -250,7 +250,7 @@
                                 </ul>
                                 @if(!$product->unilevelSettings->isEmpty())
                                 <div class="mt-auto">
-                                    <a href="#" class="btn btn-outline-gawis w-100 view-details-btn" 
+                                    <a href="#" class="btn btn-outline-gawis w-100 view-details-btn-product" 
                                         data-product-name="{{ $product->name }}" 
                                         data-unilevel-settings='{{ json_encode($product->unilevelSettings) }}'>View Details</a>
                                 </div>
@@ -381,7 +381,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var productDetailsModal = new bootstrap.Modal(document.getElementById('productDetailsModal'));
 
-    document.querySelectorAll('.view-details-btn').forEach(function(button) {
+    document.querySelectorAll('.view-details-btn-product').forEach(function(button) {
         button.addEventListener('click', function(event) {
             event.preventDefault();
 
@@ -417,11 +417,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
     var packageDetailsModal = new bootstrap.Modal(document.getElementById('packageDetailsModal'));
 
-    document.querySelectorAll('.view-details-btn').forEach(function(button) {
+    document.querySelectorAll('.view-details-btn-package').forEach(function(button) {
         button.addEventListener('click', function(event) {
             event.preventDefault();
 
