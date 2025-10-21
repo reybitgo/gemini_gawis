@@ -175,13 +175,20 @@
                 @foreach ($packages as $package)
                 <div class="col-lg-4">
                     <div class="pricing-card">
-                        <div class="pricing-header">
-                            <div class="pricing-icon">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                            <h3 class="pricing-title">{{ $package->name }}</h3>
+                        <div class="pricing-header @if ($package->image_path && strpos($package->image_url, 'package-placeholder.svg') === false) has-image @endif" style="height: 200px; overflow: hidden; @if ($package->image_path && strpos($package->image_url, 'package-placeholder.svg') === false) padding: 0; background: none; @endif">
+                            @if ($package->image_path && strpos($package->image_url, 'package-placeholder.svg') === false)
+                                <img src="{{ $package->image_url }}" alt="{{ $package->name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                            @else
+                                <div class="pricing-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3 class="pricing-title">{{ $package->name }}</h3>
+                            @endif
                         </div>
                         <div class="card-body p-4">
+                            @if ($package->image_path && strpos($package->image_url, 'package-placeholder.svg') === false)
+                                <h3 class="pricing-title text-center">{{ $package->name }}</h3>
+                            @endif
                             <div class="pricing-price">
                                 {{ $package->getFormattedPriceAttribute() }}
                             </div>
