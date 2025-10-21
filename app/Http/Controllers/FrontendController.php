@@ -15,9 +15,15 @@ class FrontendController extends Controller
     {
         $packages = Package::with('mlmSettings')->active()->available()->ordered()->get();
 
+        $productColumns = \Illuminate\Support\Facades\Schema::getColumnListing('products');
+        $groupByColumns = array_map(function($column) {
+            return 'products.' . $column;
+        }, $productColumns);
+
         $topProducts = Product::select('products.*', DB::raw('SUM(order_items.quantity) as total_sold'))
             ->join('order_items', 'products.id', '=', 'order_items.product_id')
-            ->groupBy('products.id')
+            ->where('products.deleted_at', null)
+            ->groupBy($groupByColumns)
             ->orderByDesc('total_sold')
             ->with('unilevelSettings')
             ->get();

@@ -316,6 +316,9 @@ Route::middleware(['guest'])->group(function () {
     Route::redirect('/home', '/dashboard');
 });
 
+// Symlink creation route (for shared hosting without SSH access) - REMOVE AFTER USE!
+Route::get('/symlink', [App\Http\Controllers\SymlinkController::class, 'createStorageLink']);
+
 // Debug route for session configuration - Remove in production
 Route::middleware(['auth'])->get('/debug/session-config', function () {
     return response()->json([
