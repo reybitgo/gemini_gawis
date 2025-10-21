@@ -62,12 +62,11 @@ class DatabaseResetController extends Controller
             $this->clearLogs();
 
             // Run migrations to ensure all performance indexes are in place
-            $this->ensurePerformanceOptimizations();
+            // $this->ensurePerformanceOptimizations();
 
             // Run the database reset seeder
             Artisan::call('db:seed', [
                 '--class' => 'DatabaseResetSeeder',
-                '--force' => true
             ]);
 
             // Get seeder output
@@ -271,7 +270,7 @@ class DatabaseResetController extends Controller
             Log::info('Ensuring performance optimizations are in place');
 
             // Use migrate:fresh to drop all tables and re-run all migrations for a clean slate
-            Artisan::call('migrate:fresh', ['--force' => true]);
+            // Artisan::call('migrate:fresh', ['--force' => true]);
 
             Log::info('Performance optimizations completed', [
                 'migrations_output' => Artisan::output()

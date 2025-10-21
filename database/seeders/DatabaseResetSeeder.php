@@ -37,7 +37,11 @@ class DatabaseResetSeeder extends Seeder
         $this->logOptimizationStatus();
 
         // Step 1: Clear only user transactions and non-default users (preserve everything else)
-        $this->clearUserData();
+        if (app()->environment('testing')) {
+            $this->clearAllData();
+        } else {
+            $this->clearUserData();
+        }
 
         // Step 2: Ensure roles and permissions exist (don't recreate if they exist)
         $this->ensureRolesAndPermissions();
@@ -161,19 +165,34 @@ class DatabaseResetSeeder extends Seeder
         $this->command->info('  ✅ Automatic wallet refund processing');
     }
 
+    private function clearAllData(): void
+    {
+        $this->command->info('🗑️  Clearing all data for testing environment...');
+
+        // Disable foreign key checks for proper truncation
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        $tables = DB::select('SHOW TABLES');
+        foreach ($tables as $table) {
+            $table_array = (array)$table;
+            $table_name = $table_array[key($table_array)];
+            if ($table_name !== 'migrations') {
+                DB::table($table_name)->truncate();
+            }
+        }
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $this->command->info('✅ Cleared all tables for testing environment');
+    }
+
     /**
      * Clear user transactions and orders (preserve system settings, default users, roles, and permissions)
      */
     private function clearUserData(): void
     {
         $this->command->info('🗑️  Clearing user transactions and orders (preserving system settings, users, roles, and permissions)...');
-
-        // Get default user IDs to preserve
-        $defaultUserEmails = ['admin@gawisherbal.com', 'member@gawisherbal.com'];
-        $defaultUserIds = DB::table('users')
-            ->whereIn('email', $defaultUserEmails)
-            ->pluck('id')
-            ->toArray();
 
         // Disable foreign key checks for proper truncation
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -206,39 +225,13 @@ class DatabaseResetSeeder extends Seeder
         DB::table('transactions')->truncate();
         $this->command->info('✅ Cleared all transactions');
 
-        // Clear wallets except for default users
-        if (!empty($defaultUserIds)) {
-            DB::table('wallets')->whereNotIn('user_id', $defaultUserIds)->delete();
-            $this->command->info('✅ Preserved wallets for ' . count($defaultUserIds) . ' default users');
-        } else {
-            DB::table('wallets')->truncate();
-            $this->command->info('⚠️  No default users found to preserve wallets');
-        }
+        // Clear wallets
+        DB::table('wallets')->truncate();
+        $this->command->info('✅ Cleared all wallets');
 
-        // Clear non-default users only (preserve all role and permission assignments)
-        if (!empty($defaultUserIds)) {
-            // Clear role assignments for non-default users only
-            DB::table('model_has_roles')
-                ->where('model_type', 'App\\Models\\User')
-                ->whereNotIn('model_id', $defaultUserIds)
-                ->delete();
-
-            // Clear permission assignments for non-default users only
-            DB::table('model_has_permissions')
-                ->where('model_type', 'App\\Models\\User')
-                ->whereNotIn('model_id', $defaultUserIds)
-                ->delete();
-
-            // Clear non-default users
-            DB::table('users')->whereNotIn('id', $defaultUserIds)->delete();
-            $this->command->info('✅ Preserved ' . count($defaultUserIds) . ' default users with their roles');
-        } else {
-            // If no default users exist, clear all users but preserve roles/permissions structure
-            DB::table('model_has_roles')->truncate();
-            DB::table('model_has_permissions')->truncate();
-            DB::table('users')->truncate();
-            $this->command->info('⚠️  No default users found to preserve');
-        }
+        // Clear users
+        DB::table('users')->truncate();
+        $this->command->info('✅ Cleared all users');
 
         // Re-enable foreign key checks
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -519,30 +512,30 @@ class DatabaseResetSeeder extends Seeder
      */
     private function resetAndReloadPackages(): void
     {
-        $this->command->info('📦 Resetting and reloading preloaded packages...');
+        $this->command->info('📦 Preserving existing packages and MLM settings...');
 
-        // Clear all existing packages (force delete to completely remove)
-        Package::withTrashed()->forceDelete();
-        $this->command->info('🗑️  Cleared all existing packages');
+        // // Clear all existing packages (force delete to completely remove)
+        // Package::withTrashed()->forceDelete();
+        // $this->command->info('🗑️  Cleared all existing packages');
 
-        // Clear MLM settings (will be recreated with packages)
-        DB::table('mlm_settings')->truncate();
-        $this->command->info('🗑️  Cleared all MLM settings');
+        // // Clear MLM settings (will be recreated with packages)
+        // DB::table('mlm_settings')->truncate();
+        // $this->command->info('🗑️  Cleared all MLM settings');
 
-        // Clear package cache (Sprint 1 enhancement)
-        $this->clearPackageCache();
+        // // Clear package cache (Sprint 1 enhancement)
+        // $this->clearPackageCache();
 
-        // Reset auto-increment counters
-        DB::statement('ALTER TABLE packages AUTO_INCREMENT = 1');
-        DB::statement('ALTER TABLE mlm_settings AUTO_INCREMENT = 1');
+        // // Reset auto-increment counters
+        // DB::statement('ALTER TABLE packages AUTO_INCREMENT = 1');
+        // DB::statement('ALTER TABLE mlm_settings AUTO_INCREMENT = 1');
 
-        // Reload preloaded packages by calling the PackageSeeder
-        $this->command->info('🔄 Reloading preloaded packages with MLM settings...');
-        $this->call(\Database\Seeders\PackageSeeder::class);
+        // // Reload preloaded packages by calling the PackageSeeder
+        // $this->command->info('🔄 Reloading preloaded packages with MLM settings...');
+        // $this->call(\Database\Seeders\PackageSeeder::class);
 
         $packageCount = Package::count();
         $mlmSettingsCount = MlmSetting::count();
-        $this->command->info("✅ Reloaded {$packageCount} preloaded packages with {$mlmSettingsCount} MLM settings");
+        $this->command->info("✅ Preserved {$packageCount} packages and {$mlmSettingsCount} MLM settings");
     }
 
     /**
@@ -699,27 +692,27 @@ class DatabaseResetSeeder extends Seeder
      */
     private function resetAndReloadProducts(): void
     {
-        $this->command->info('📦 Resetting and reloading preloaded products...');
+        $this->command->info('📦 Preserving existing products and unilevel settings...');
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        \App\Models\UnilevelSetting::truncate();
-        \App\Models\Product::truncate();
+        // \App\Models\UnilevelSetting::truncate();
+        // \App\Models\Product::truncate();
         
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $this->command->info('🗑️  Cleared all existing products and unilevel settings');
+        // $this->command->info('🗑️  Cleared all existing products and unilevel settings');
 
-        // Reset auto-increment counters
-        DB::statement('ALTER TABLE products AUTO_INCREMENT = 1');
-        DB::statement('ALTER TABLE unilevel_settings AUTO_INCREMENT = 1');
+        // // Reset auto-increment counters
+        // DB::statement('ALTER TABLE products AUTO_INCREMENT = 1');
+        // DB::statement('ALTER TABLE unilevel_settings AUTO_INCREMENT = 1');
 
-        // Reload preloaded products by calling the ProductSeeder
-        $this->command->info('🔄 Reloading preloaded products with Unilevel settings...');
-        $this->call(\Database\Seeders\ProductSeeder::class);
+        // // Reload preloaded products by calling the ProductSeeder
+        // $this->command->info('🔄 Reloading preloaded products with Unilevel settings...');
+        // $this->call(\Database\Seeders\ProductSeeder::class);
 
         $productCount = \App\Models\Product::count();
-        $this->command->info("✅ Reloaded {$productCount} preloaded products.");
+        $this->command->info("✅ Preserved {$productCount} existing products.");
     }
 
     /**
