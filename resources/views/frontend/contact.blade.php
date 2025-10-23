@@ -80,7 +80,7 @@
                     <!-- Contact Info Box End -->
                 </div>
 
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <!-- Contact Us Image Start -->
                     <div class="contact-us-image">
                         <figure>
@@ -101,30 +101,53 @@
                         </div>
                         <!-- Section Title End -->
 
-                        <form id="contactForm" action="#" method="POST" data-toggle="validator" class="contact-form wow fadeInUp">
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form id="contactForm" action="{{ route('contact.submit') }}" method="POST" class="contact-form">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required />
+                                    <input type="text" name="fname" class="form-control" id="fname" placeholder="First name" required value="{{ old('fname') }}"/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required />
+                                    <input type="text" name="lname" class="form-control" id="lname" placeholder="Last name" required value="{{ old('lname') }}"/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="E-mail" required />
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="E-mail" required value="{{ old('email') }}"/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required />
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required value="{{ old('phone') }}"/>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
                                 <div class="form-group col-md-12 mb-5">
-                                    <textarea name="message" class="form-control" id="message" rows="4" placeholder="Write Message...   "></textarea>
+                                    <textarea name="message" class="form-control" id="message" rows="4" placeholder="Write Message...   ">{{ old('message') }}</textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
 
@@ -138,7 +161,7 @@
                         </form>
                     </div>
                     <!-- Contact Us Form End -->
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

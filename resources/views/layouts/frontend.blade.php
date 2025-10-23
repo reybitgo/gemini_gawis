@@ -1241,7 +1241,7 @@
         <!-- Wow js file -->
         <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
         <!-- Main Custom js file -->
-        <script src="{{ asset('frontend/js/function.js') }}"></script>
+        <script src="{{ asset('frontend/js/function.js') }}?v={{ time() }}"></script>
 
         <!-- Scroll to Top Button -->
         <button id="scrollTopBtn" title="Go to top">
