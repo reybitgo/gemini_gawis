@@ -38,7 +38,7 @@
                     <!-- About Images Start -->
                     <div class="about-images">
                         <figure>
-                            <img src="{{ asset('frontend/images/about-img.png') }}" alt="" />
+                            <img src="{{ asset('frontend/images/about-img-2.png') }}" alt="" />
                         </figure>
                     </div>
                     <!-- About Images End -->

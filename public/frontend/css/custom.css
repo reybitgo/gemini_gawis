@@ -765,9 +765,7 @@ header.main-header .header-sticky.active{
 	content: '';
 	display: block;
 	position: absolute;
-	top: 20%;
 	right: 0;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
@@ -1213,7 +1211,6 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	right: -30px;
 	top: 5%;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
@@ -1525,7 +1522,6 @@ header.main-header .header-sticky.active{
 	display: block;
 	position: absolute;
 	top: 5%;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
@@ -2161,7 +2157,6 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	right: -30px;
 	top: 5%;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
@@ -2560,7 +2555,6 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	top: 10%;
 	right: 0;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
@@ -2839,7 +2833,6 @@ header.main-header .header-sticky.active{
 	position: absolute;
 	top: 28%;
 	right: 0;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 110px;
@@ -2912,7 +2905,6 @@ header.main-header .header-sticky.active{
 	display: block;
 	position: absolute;
 	top: 5%;
-	background: url('../images/section-bg-2.png') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	width: 180px;
