@@ -135,6 +135,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('login') }}">Account</a>
                                     </li>
+                                    <li class="nav-item highlighted-menu">
+                                        <a class="nav-link" href="{{ route('register') }}">Join Now</a>
+                                    </li>
                                     @else
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
