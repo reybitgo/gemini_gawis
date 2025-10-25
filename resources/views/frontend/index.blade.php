@@ -34,8 +34,8 @@
 
                         <!-- Hero Button Start -->
                         <div class="hero-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="#" class="btn-default btn-highlighted">Learn More</a>
-                            <a href="#" class="btn-default border-btn">Contact Us</a>
+                            <a href="/opportunity" class="btn-default btn-highlighted">Learn More</a>
+                            <a href="/contact" class="btn-default border-btn">Contact Us</a>
                         </div>
                         <!-- Hero Button End -->
                     </div>
@@ -143,12 +143,12 @@
                             <!-- About Contact Box Start -->
                             <div class="about-contact-box">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend/images/icon-phone.svg') }}" alt="" />
+                                    <img src="{{ asset('frontend/images/icon-mail.svg') }}" alt="" />
                                 </div>
                                 <div class="about-contact-box-content">
                                     <p>Support Any Time</p>
                                     <h3>
-                                        <a href="#">+63 987 654 3210</a>
+                                        <a href="mailto:support@gawisherbal.com"><small>support@gawisherbal.com</small></a>
                                     </h3>
                                 </div>
                             </div>

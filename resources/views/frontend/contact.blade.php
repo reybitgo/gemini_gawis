@@ -35,22 +35,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Contact Info Box Start -->
+                    @php
+                        $adminUser = \App\Models\User::role('admin')->first();
+                    @endphp
                     <div class="contact-info-box">
+                        @if($adminUser && $adminUser->phone)
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp">
                             <div class="icon-box">
                                 <img src="{{ asset('frontend/images/icon-phone-accent.svg') }}" alt="" />
                             </div>
                             <div class="contact-info-content">
-                                <p>Contact Us</p>
+                                <p>Call Us</p>
                                 <h3>
-                                    <a href="tel:+639876543210"><small>+63 987 654 3210</small></a>
+                                    <a href="tel:{{ $adminUser->phone }}"><small>{{ $adminUser->phone }}</small></a>
                                 </h3>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
+                        @endif
 
+                        @if($adminUser && $adminUser->email)
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
@@ -59,12 +64,14 @@
                             <div class="contact-info-content">
                                 <p>Email address</p>
                                 <h3>
-                                    <a href="mailto:support@gawisherbal.com"><small>support@gawisherbal.com</small></a>
+                                    <a href="mailto:{{ $adminUser->email }}"><small>{{ $adminUser->email }}</small></a>
                                 </h3>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
+                        @endif
 
+                        @if($adminUser && ($adminUser->address || $adminUser->city))
                         <!-- Contact Info Item Start -->
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
@@ -72,10 +79,11 @@
                             </div>
                             <div class="contact-info-content">
                                 <p>location</p>
-                                <h3><small>Baguio City, Philippines</small></h3>
+                                <h3><small>{{ $adminUser->address }}{{ $adminUser->city ? ', ' . $adminUser->city : '' }}, Philippines</small></h3>
                             </div>
                         </div>
                         <!-- Contact Info Item End -->
+                        @endif
                     </div>
                     <!-- Contact Info Box End -->
                 </div>
