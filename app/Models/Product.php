@@ -122,6 +122,14 @@ class Product extends Model
         return currency($this->price);
     }
 
+    public function getFormattedLongDescriptionAttribute()
+    {
+        $content = e($this->long_description); // Escape HTML entities
+        $content = preg_replace("/\n\n/", "</p><p>", $content); // Convert double newlines to paragraph breaks
+        $content = nl2br($content); // Convert single newlines to <br> within paragraphs
+        return "<p>{$content}</p>"; // Wrap the entire content in a paragraph
+    }
+
     // Business Logic
     public function isAvailable(): bool
     {

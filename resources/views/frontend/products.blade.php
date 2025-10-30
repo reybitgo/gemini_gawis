@@ -78,7 +78,7 @@
                     @foreach($products as $index => $product)
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="product-item wow fadeInUp h-100 d-flex flex-column">
-                                <div class="product-image" style="height: 150px; overflow: hidden; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productCarouselModal" data-bs-slide-to="{{ $index }}" data-bs-long-description="{{ $product->long_description }}">
+                                <div class="product-image" style="height: 150px; overflow: hidden; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productCarouselModal" data-bs-slide-to="{{ $index }}" data-bs-long-description="{{ $product->formatted_long_description }}">
                                     <figure class="image-anime h-100">
                                         <img src="{{ $product->image_url }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
                                     </figure>
@@ -153,7 +153,7 @@
                         </div>
                         <div class="carousel-inner">
                             @foreach ($products as $index => $product)
-                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" data-bs-long-description="{{ $product->long_description }}">
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" data-bs-long-description="{{ $product->formatted_long_description }}">
                                     <img src="{{ $product->image_url }}" class="d-block w-100" alt="{{ $product->name }}">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5 style="color: #f8f9fa;">{{ $product->name }}</h5>
@@ -170,7 +170,7 @@
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-                    <div id="carouselProductDescription" class="mt-3 p-3 bg-light rounded d-none">
+                    <div id="carouselProductDescription" class="mt-3 p-3 bg-light rounded d-none prose">
                         <!-- Long description will be loaded here -->
                     </div>
                 </div>
