@@ -281,7 +281,7 @@
                     <a href="#" id="learnMoreCarousel" class="btn btn-link float-end ms-auto">Learn More</a>
                 </div>
                 <div class="modal-body">
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="productCarousel" class="carousel slide">
                         <div class="carousel-indicators">
                             @foreach ($topProducts as $index => $product)
                                 <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"></button>
@@ -500,23 +500,14 @@ var productCarouselElement = document.getElementById('productCarousel');
 var carouselProductDescription = document.getElementById('carouselProductDescription');
 var learnMoreCarouselLink = document.getElementById('learnMoreCarousel');
 
-// Function to toggle description visibility and carousel autoplay
-function toggleDescriptionAndAutoplay(carouselInstance, descriptionElement) {
-    if (descriptionElement.classList.contains('d-none')) {
-        // Description is hidden, show it and pause carousel
-        descriptionElement.classList.remove('d-none');
-        carouselInstance.pause();
-    } else {
-        // Description is visible, hide it and resume carousel
-        descriptionElement.classList.add('d-none');
-        carouselInstance.cycle();
-    }
+// Function to toggle description visibility
+function toggleDescription(descriptionElement) {
+    descriptionElement.classList.toggle('d-none');
 }
 
 // Initialize carousel instance once
 var productCarouselInstance = new bootstrap.Carousel(productCarouselElement, {
-    interval: 5000, // Default interval, can be adjusted
-    pause: 'hover' // Pause on hover
+    interval: false // Disable auto-play
 });
 
 productCarouselModalElement.addEventListener('show.bs.modal', function (event) {
@@ -529,30 +520,27 @@ productCarouselModalElement.addEventListener('show.bs.modal', function (event) {
     var longDescription = button.getAttribute('data-bs-long-description');
     carouselProductDescription.innerHTML = longDescription;
 
-    // Ensure description is hidden and carousel is cycling when modal opens
+    // Ensure description is hidden when modal opens
     carouselProductDescription.classList.add('d-none');
-    productCarouselInstance.cycle();
 });
 
 productCarouselElement.addEventListener('slid.bs.carousel', function () {
     var activeItem = productCarouselElement.querySelector('.carousel-item.active');
     var longDescription = activeItem.getAttribute('data-bs-long-description');
     carouselProductDescription.innerHTML = longDescription;
-    // If description is visible, update content but keep it visible and carousel paused
-    // If description is hidden, it remains hidden and carousel continues cycling
 });
 
 // Event listener for "Learn More" link
 learnMoreCarouselLink.addEventListener('click', function(event) {
     event.preventDefault();
-    toggleDescriptionAndAutoplay(productCarouselInstance, carouselProductDescription);
+    toggleDescription(carouselProductDescription);
 });
 
 // Event listener for clicks on carousel images
 productCarouselElement.addEventListener('click', function(event) {
     // Check if the click was on an image within the carousel item
     if (event.target.tagName === 'IMG' && event.target.closest('.carousel-item')) {
-        toggleDescriptionAndAutoplay(productCarouselInstance, carouselProductDescription);
+        toggleDescription(carouselProductDescription);
     }
 });
 </script>
