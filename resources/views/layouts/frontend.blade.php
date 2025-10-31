@@ -1252,23 +1252,23 @@
         </button>
 
         <script>
-            const scrollBtn = document.getElementById("scrollTopBtn");
+            $(document).ready(function() {
+                var $scrollBtn = $("#scrollTopBtn");
 
-            window.onscroll = function () {
-                if (
-                    document.body.scrollTop > 300 ||
-                    document.documentElement.scrollTop > 300
-                ) {
-                    scrollBtn.style.display = "flex";
-                } else {
-                    scrollBtn.style.display = "none";
-                }
-            };
+                $(window).on('scroll', function() {
+                    if ($(this).scrollTop() > 300) {
+                        $scrollBtn.css('display', 'flex');
+                    } else {
+                        $scrollBtn.css('display', 'none');
+                    }
+                });
 
-            scrollBtn.addEventListener("click", function () {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
+                $scrollBtn.on('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                    });
                 });
             });
         </script>
