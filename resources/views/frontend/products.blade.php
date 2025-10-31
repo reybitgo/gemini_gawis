@@ -97,7 +97,8 @@
                                     @if(!$product->unilevelSettings->isEmpty())
                                     <div class="mt-auto">
                                         <a href="#" class="btn btn-outline-gawis w-100 view-details-btn" 
-                                            data-product-name="{{ $product->name }}" 
+                                            data-product-name="{{ $product->name }}"
+                                            data-product-short-description="{{ $product->short_description }}"
                                             data-unilevel-settings='{{ json_encode($product->unilevelSettings) }}'>View Details</a>
                                     </div>
                                     @endif
@@ -191,6 +192,7 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <h3 id="modalProductName"></h3>
+                                <p id="modalProductShortDescription" class="text-muted mb-3"></p>
                                 <hr>
                                 <h4><i class="fas fa-sitemap me-2"></i>Unilevel Bonus Settings</h4>
                                 <p class="text-muted">This table shows the unilevel bonus you can earn from this product.</p>
@@ -244,9 +246,11 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
 
             var productName = this.dataset.productName;
+            var productShortDescription = this.dataset.productShortDescription;
             var unilevelSettings = JSON.parse(this.dataset.unilevelSettings);
 
             document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('modalProductShortDescription').textContent = productShortDescription;
 
             var unilevelSettingsTbody = document.getElementById('modalUnilevelSettings');
             unilevelSettingsTbody.innerHTML = '';
