@@ -49,14 +49,11 @@
                                     @if(isset($item['short_description']) && $item['short_description'])
                                         <p class="text-muted small mb-1">{{ Str::limit($item['short_description'], 80) }}</p>
                                     @endif
-                                    <div class="d-flex align-items-center text-sm">
-                                        <span class="me-3">Quantity: <strong>{{ $item['quantity'] }}</strong></span>
-                                        <span class="me-3">Unit Price: <strong>{{ currency($item['price']) }}</strong></span>
-                                        <span class="text-primary">Points: <strong>{{ number_format(($item['points_awarded'] ?? $item['points'] ?? 0) * $item['quantity']) }}</strong></span>
+                                    <div class="d-flex flex-wrap align-items-center text-sm">
+                                        <span class="me-3 mb-1">Quantity: <strong>{{ $item['quantity'] }}</strong></span>
+                                        <span class="me-3 mb-1">Unit Price: <strong>{{ currency($item['price']) }}</strong></span>
+                                        <span class="text-primary mb-1">Points: <strong>{{ number_format(($item['points_awarded'] ?? $item['points'] ?? 0) * $item['quantity']) }}</strong></span>
                                     </div>
-                                </div>
-                                <div class="text-end">
-                                    <div class="fw-bold h5 mb-0">{{ currency($item['price'] * $item['quantity']) }}</div>
                                 </div>
                             </div>
                         </div>
