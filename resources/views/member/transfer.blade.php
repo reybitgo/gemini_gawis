@@ -92,7 +92,7 @@
             </div>
             <div class="card-body">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    @foreach([10, 25, 50, 100, 250, 500] as $quickAmount)
+                    @foreach([10, 25, 50, 100, 250, 500, 1000] as $quickAmount)
                         @if($wallet->purchase_balance >= $quickAmount)
                             <button type="button" class="btn btn-outline-primary" onclick="setAmount({{ $quickAmount }})">
                                 {{ currency_symbol() }}{{ $quickAmount }}
@@ -106,7 +106,7 @@
 </div>
 
 <!-- Alert Messages -->
-@if (session('success'))
+{{-- @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <svg class="icon me-2">
             <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-check') }}"></use>
@@ -114,7 +114,7 @@
         {{ session('success') }}
         <button type="button" class="btn-close" data-coreui-dismiss="alert"></button>
     </div>
-@endif
+@endif --}}
 
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">

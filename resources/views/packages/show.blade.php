@@ -163,18 +163,18 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-6 text-muted">Points:</div>
-                        <div class="col-6 fw-semibold">{{ number_format($package->points_awarded) }}</div>
+                        <div class="col-6 fw-semibold text-end">{{ number_format($package->points_awarded) }}</div>
                     </div>
                     @if(isset($package->meta_data['duration']))
                         <div class="row mb-2">
                             <div class="col-6 text-muted">Duration:</div>
-                            <div class="col-6 fw-semibold">{{ $package->meta_data['duration'] }}</div>
+                            <div class="col-6 fw-semibold text-end">{{ $package->meta_data['duration'] }}</div>
                         </div>
                     @endif
                     @if(isset($package->meta_data['category']))
                         <div class="row mb-2">
                             <div class="col-6 text-muted">Category:</div>
-                            <div class="col-6">
+                            <div class="col-6 text-end">
                                 <span class="badge bg-secondary">{{ ucfirst($package->meta_data['category']) }}</span>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                     @if($package->quantity_available !== null)
                         <div class="row">
                             <div class="col-6 text-muted">Available:</div>
-                            <div class="col-6 fw-semibold">
+                            <div class="col-6 fw-semibold text-end">
                                 @if($package->quantity_available > 0)
                                     {{ $package->quantity_available }} units
                                 @else

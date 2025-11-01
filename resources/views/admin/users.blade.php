@@ -159,19 +159,19 @@
                                 </div>
                             </td>
                             <td>
-                                @if($user->two_factor_secret)
+                                @if($user->network_status === 'active')
                                     <span class="badge bg-success">
-                                        <svg class="icon me-1">
-                                            <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
+                                        <svg class="icon">
+                                            <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-check-alt') }}"></use>
                                         </svg>
-                                        2FA Enabled
+                                        Active
                                     </span>
                                 @else
-                                    <span class="badge bg-warning">
-                                        <svg class="icon me-1">
-                                            <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-lock-unlocked') }}"></use>
+                                    <span class="badge bg-secondary">
+                                        <svg class="icon">
+                                            <use xlink:href="{{ asset('coreui-template/vendors/@coreui/icons/svg/free.svg#cil-x') }}"></use>
                                         </svg>
-                                        2FA Disabled
+                                        Inactive
                                     </span>
                                 @endif
                             </td>
